@@ -24,6 +24,6 @@ class Product
 
         $stmt->execute();
 
-        return $stmt->fetchAll();
+        return json_encode($stmt->fetchAll());
     }
 }

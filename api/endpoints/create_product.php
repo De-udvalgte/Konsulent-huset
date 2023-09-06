@@ -11,13 +11,13 @@ $db = $database->getConnection();
 $product = new Product($db);
 
 // get posted data
-$data = json_decode(file_get_contents("php://input"));
+//$data = json_decode(file_get_contents("php://input"));
 
 // set product property values
-$product->productName = $data->productName;
-$product->productDesc = $data->productDesc;
-$product->productTitle = $data->productTitle;
-$product->price = $data->price;
+$product->productName = $_POST["productName"];
+$product->productDesc = $_POST["productDesc"];
+$product->productTitle = $_POST["productTitle"];
+$product->price = $_POST["price"];
 
 
 // create the product

@@ -30,6 +30,7 @@ if(
 ){
     // set response code
     http_response_code(200);
+    header("Location: products");
     // display message: product was created
     echo json_encode(array("message" => "Product was created."));
 }

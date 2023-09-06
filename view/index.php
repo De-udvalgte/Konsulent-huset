@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konsulent-Huset</title>
-</head>
-<body>
-    <h1>Velkommen til Konsulent-Huset</h1>
-    
-</body>
-</html>
+<?php include 'components/header.php'; ?>
+<main role="main" class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Velkommen til Konsulent-Huset</h1>
+        </div>
+    </div>
+</main>
+<?php include 'components/footer.php'; ?>

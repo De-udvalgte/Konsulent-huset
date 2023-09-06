@@ -1,11 +1,6 @@
 <?php
-require("api/config/database.php");
-require("api/objects/product.php");
 
-$database = new Database();
-$db = $database->getConnection();
-$product = new Product($db);
-$result = $product->read();
+$result = file_get_contents('http://localhost/konsulent-huset/api/products');
 
 ?>
 <?php include 'components/header.php'; ?>

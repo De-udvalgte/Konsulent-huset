@@ -10,6 +10,6 @@ get('/konsulent-huset/api/products', 'api/endpoints/get_products.php');
 post('/konsulent-huset/product', 'api/endpoints/create_product.php');
 //Login
 get('/konsulent-huset/login', 'view/login_page.php');
-
+post('/konsulent-huset/register_user', 'api/endpoints/register_user.php');
 
 ?>

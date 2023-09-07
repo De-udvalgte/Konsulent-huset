@@ -10,11 +10,15 @@ $db = $database->getConnection();
 // instantiate product object
 $user = new User($db);
 
+// get posted data
+$data = json_decode(file_get_contents("php://input"));
+
 // set product property values
-$user->firstName = $_POST["firstName"];
-$user->lastName = $_POST["lastName"];
-$user->email = $_POST["email"];
-$user->password = $_POST["password"];
+$user->firstName = $data->firstName;
+$user->lastName = $data->lastName;
+$user->email = $data->email;
+$user->password = $data->password;
+
 
 if (
     !empty($user->firstName) &&
@@ -27,7 +31,7 @@ if (
 
     // set response code
     http_response_code(200);
-    header("Location: products");
+    header("Location: login");
     // display message: product was created
     echo json_encode(array("message" => "User was created."));
 }

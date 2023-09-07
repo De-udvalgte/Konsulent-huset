@@ -22,10 +22,10 @@
                     <a class="nav-item nav-link" href="/konsulent-huset">Home</a>
                     <a class="nav-item nav-link" href="/konsulent-huset/products">Products</a>
                     <a class="nav-item nav-link" href="/konsulent-huset/create_product">Create Product</a>
+                    <a class="nav-item nav-link" href="/konsulent-huset/login">Login</a>
                     
                     <!--
                     <a class="nav-item nav-link" href="#">Logout</a>
-                    <a class="nav-item nav-link" href="#">Login</a>
                     <a class="nav-item nav-link" href="#">Sign Up</a>
                     -->
                 </div>

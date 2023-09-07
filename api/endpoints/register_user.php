@@ -14,10 +14,10 @@ $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
 
 // set product property values
-$user->firstName = $data->firstName;
-$user->lastName = $data->lastName;
-$user->email = $data->email;
-$user->password = $data->password;
+$user->firstName = $_POST["firstName"];
+$user->lastName = $_POST["lastName"];
+$user->email = $_POST["email"];
+$user->password = $_POST["password"];
 
 
 if (
@@ -40,5 +40,5 @@ else {
     // set response code
     http_response_code(400);
     // display message: unable to create product
-    echo json_encode(array("message" => "Unable to create user."));
+    echo json_encode(array("message" => "Unable to create user." , $user->email));
 }

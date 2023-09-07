@@ -11,5 +11,5 @@ post('/konsulent-huset/product', 'api/endpoints/create_product.php');
 //Login
 get('/konsulent-huset/login', 'view/login_page.php');
 post('/konsulent-huset/register_user', 'api/endpoints/register_user.php');
-
+get('/konsulent-huset/register_page', 'view/register_page.php');
 ?>

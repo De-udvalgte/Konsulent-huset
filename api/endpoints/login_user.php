@@ -17,9 +17,7 @@ $email_exists = $user->emailExists();
 if($email_exists && password_verify($_POST["password"], $user->password )){
     //set response code
     http_response_code(200);
-    header("Location: ");
-    // generate session 
-    //session_start();
+    header("Location: /konsulent-huset");
     echo json_encode(array("message" => "Successful login."));
 }
 // login failed

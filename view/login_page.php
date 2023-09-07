@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col">
             <h1>Login</h1>
-            <form action="login" method="POST">
+            <form action="login_user" method="POST">
 
                 <div class="form-group">
                     <label for="email">Email</label>

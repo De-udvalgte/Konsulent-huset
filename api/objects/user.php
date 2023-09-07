@@ -26,7 +26,7 @@ class User
             lastName = :lastName,
             email = :email,
             password = :password,
-            rolesId = :rolesId";
+            rolesId = 1";
 
             // prepare the query
         $stmt = $this->conn->prepare($query);
@@ -36,13 +36,13 @@ class User
         $this->lastName = htmlspecialchars(strip_tags($this->lastName));
         $this->email = htmlspecialchars(strip_tags($this->email));
         $this->password = htmlspecialchars(strip_tags($this->password));
-        $this->rolesId = htmlspecialchars(strip_tags($this->rolesId));
+        
 
         // bind the values
         $stmt->bindParam(':firstName', $this->firstName);
         $stmt->bindParam(':lastName', $this->lastName);
         $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':rolesId', 1);
+     
 
         //hash password, before saving
         $password_hash = password_hash($this->password, PASSWORD_BCRYPT);

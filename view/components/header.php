@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,9 +23,13 @@
                     <a class="nav-item nav-link" href="/konsulent-huset">Home</a>
                     <a class="nav-item nav-link" href="/konsulent-huset/products">Products</a>
                     <a class="nav-item nav-link" href="/konsulent-huset/create_product">Create Product</a>
+                    <?php if (empty($_SESSION["userId"])){ ?>
                     <a class="nav-item nav-link" href="/konsulent-huset/login">Login</a>
                     <a class="nav-item nav-link" href="/konsulent-huset/register_page">Sign Up</a>
-                    
+                    <?php } else {?>
+                        <a class="nav-item nav-link" href="/konsulent-huset/logout">Logout</a>
+                    <?php }?>
+
                     <!--
                     <a class="nav-item nav-link" href="#">Logout</a>
                     

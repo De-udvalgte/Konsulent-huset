@@ -96,7 +96,10 @@ class User
 
             session_start();
             $_SESSION["userId"] = $this->userId;
-            print(session_id());
+            $_SESSION["firstName"] = $this->firstName;
+            $_SESSION["lastName"] = $this->lastName;
+            $_SESSION["email"] = $this->email;
+            $_SESSION["rolesId"] = $this->rolesId;
             // return true because email exists in the database
             return true;
         }

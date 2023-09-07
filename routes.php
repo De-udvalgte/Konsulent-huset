@@ -12,4 +12,7 @@ post('/konsulent-huset/product', 'api/endpoints/create_product.php');
 get('/konsulent-huset/login', 'view/login_page.php');
 post('/konsulent-huset/register_user', 'api/endpoints/register_user.php');
 get('/konsulent-huset/register_page', 'view/register_page.php');
+post('/konsulent-huset/login_user', 'api/endpoints/login_user.php');
+//Logout
+get('/konsulent-huset/logout', 'api/endpoints/logout_user.php');
 ?>

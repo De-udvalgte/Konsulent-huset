@@ -1,6 +1,6 @@
 <?php $result = file_get_contents('http://localhost/konsulent-huset/api/products'); ?>
 
-<?php include 'components/header.php'; ?>
+<?php include 'view/components/header.php'; ?>
 <main role="main" class="container">
     <div class="row">
         <div class="col">
@@ -13,7 +13,10 @@
                     <th>Name</th>
                     <th>Title</th>
                     <th>Description</th>
-                    <th>Price</th>
+                    <th>Price / Hour</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
                 </tr>
 
                 <?php foreach (json_decode($result, true) as $product) { ?>
@@ -34,6 +37,9 @@
                         <td>
                             <?php echo htmlspecialchars($product["price"]) ?>
                         </td>
+                        <td><a class="action" href="">View</a></td>
+                        <td><a class="action" href="">Edit</a></td>
+                        <td><a class="action" href="">Delete</a></td>
                     </tr>
                     <?php
                 }
@@ -44,4 +50,4 @@
     </div>
 </main>
 
-<?php include 'components/footer.php'; ?>
+<?php include 'view/components/footer.php'; ?>

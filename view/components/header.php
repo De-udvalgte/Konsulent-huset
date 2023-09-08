@@ -21,7 +21,7 @@
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="/konsulent-huset">Home</a>
                     <a class="nav-item nav-link" href="/konsulent-huset/products">Products</a>
-                    <a class="nav-item nav-link" href="/konsulent-huset/create_product">Create Product</a>
+                    <a class="nav-item nav-link" href="/konsulent-huset/products/create">Create Product</a>
                     <?php if (empty($_SESSION["userId"])) { ?>
                         <a class="nav-item nav-link" href="/konsulent-huset/login">Login</a>
                         <a class="nav-item nav-link" href="/konsulent-huset/register_page">Sign Up</a>

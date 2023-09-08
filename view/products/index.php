@@ -1,4 +1,7 @@
-<?php $result = file_get_contents('http://localhost/konsulent-huset/api/products'); ?>
+<?php
+$result = file_get_contents('http://localhost/konsulent-huset/api/products');
+
+?>
 
 <?php include 'view/components/header.php'; ?>
 <main role="main" class="container">
@@ -40,9 +43,11 @@
                             <?php echo htmlspecialchars($product["price"]) ?>
                         </td>
 
-                        <td><a class="action" href="">View</a></td>
+                        <td><a class="action" href="<?php echo "products/page/" . $product['productId']; ?>">View</a></td>
                         <?php if ($_SESSION["rolesId"] === 2) { ?>
-                            <td><a class="action" href="">Edit</a></td>
+                            <td>
+                                <a class="action" href="<?php echo "products/edit/" . $product['productId']; ?>">Edit</a>
+                            </td>
                             <td>
                                 <a class="action" href="<?php echo "products/delete/" . $product['productId']; ?>">Delete</a>
                             </td>

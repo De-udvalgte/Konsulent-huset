@@ -10,34 +10,31 @@ $db = $database->getConnection();
 // instantiate product object
 $user = new User($db);
 
-// get posted data
-$data = json_decode(file_get_contents("php://input"));
-
 // set product property values
 $user->userId = $userId;
-$user->firstName = $_POST["firstName"];
-$user->lastName = $_POST["lastName"];
-$user->email = $_POST["email"];
-//$user->password = $_POST["password"];
-//$user->rolesId = $_POST["rolesId"];
-
+$user->firstName = filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_STRING);
+$user->lastName = filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_STRING);
+$user->email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
 if (
     !empty($user->userId) &&
     !empty($user->firstName) &&
     !empty($user->lastName) &&
     !empty($user->email) &&
-    //!empty($user->password) &&
-    //!empty($user->rolesId) &&
+
     $user->update()
 
 ) {
 
     // set response code
     http_response_code(200);
-    header("Location: /konsulent-huset");
+    
+    // redirect to profile page
+    header("Location: /konsulent-huset/profile");
+    
     // display message: user was updated
     echo json_encode(array("message" => "User was updated."));
+
     // update session variables
     session_start();
     $_SESSION["firstName"] = $user->firstName;

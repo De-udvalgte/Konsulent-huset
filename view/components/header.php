@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php session_start();
+if (!isset($_SESSION["userId"])) {
+    $_SESSION["rolesId"] = 1;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

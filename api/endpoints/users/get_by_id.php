@@ -9,31 +9,22 @@ $db = $database->getConnection();
 
 // instantiate product object
 $user = new User($db);
+
+// set ID property of record to read
 $user->userId = $userId;
 
-$stmt = $user->getById();
+$user->getById();
 
-if ($stmt->rowCount() > 0) {
-    $users_arr = array();
-
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        // extract row
-        // this will make $row['name'] to
-        // just $name only
-        extract($row);
-
-        $user_item = array(
-            "userId" => $userId,
-            "firstName" => $firstName,
-            "lastName" => $lastName,
-            "email" => $email,
-            "created" => $created,
-            "modified" => $modified,
-            "rolesId" => $rolesId,
-        );
-
-        array_push($users_arr, $user_item);
-    }
+if ($user != null) {
+    $users_arr = array(
+        "userId" => $user->userId,
+        "firstName" => $user->firstName,
+        "lastName" => $user->lastName,
+        "email" => $user->email,
+        "created" => $user->created,
+        "modified" => $user->modified,
+        "rolesId" => $user->rolesId,
+    );
 
     // set response code - 200 OK
     http_response_code(200);

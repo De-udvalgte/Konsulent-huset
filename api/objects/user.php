@@ -70,21 +70,38 @@ class User
 
     function getById()
     {
-        $query = "SELECT * FROM " . $this->table_name . " WHERE userId= :id";
-
-        // sanitize
-        $this->userId = htmlspecialchars(strip_tags($this->userId));
-
-        // bind given userId value
-        $bind = array('id' => $this->userId);
+        $query = "SELECT * 
+            FROM 
+                " . $this->table_name . " 
+            WHERE 
+                userId= ?
+            LIMIT
+                0,1";
 
         // prepare the query
         $stmt = $this->conn->prepare($query);
 
+        // sanitize
+        $this->userId = htmlspecialchars(strip_tags($this->userId));
 
-        $stmt->execute($bind);
+        // bind the values
+        $stmt->bindParam(1, $this->userId);
 
-        return $stmt;
+        // execute the query
+        $stmt->execute();
+        
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // set values to object properties
+        $this->firstName = $row['firstName'];
+        $this->lastName = $row['lastName'];
+        $this->email = $row['email'];
+        $this->created = $row['created'];
+        $this->modified = $row['modified'];
+        $this->rolesId = $row['rolesId'];
+        
+
     }
 
     function update()

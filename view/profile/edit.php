@@ -1,5 +1,4 @@
 <?php include 'view/components/header.php'; ?>
-<?php $result = file_get_contents('http://localhost/konsulent-huset/api/users/' . $_SESSION["userId"]) ?>
 <main role="main" class="container">
     <div class="row">
         <div class="col pt-5">

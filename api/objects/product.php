@@ -27,6 +27,39 @@ class Product
         return $stmt;
     }
 
+    function get_by_id()
+    {
+        $query = "SELECT * 
+            FROM 
+                " . $this->table_name . " 
+            WHERE 
+                productId = ?
+            LIMIT
+                0,1";
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->productId = htmlspecialchars(strip_tags($this->productId));
+
+        // bind the values
+        $stmt->bindParam(1, $this->productId);
+
+        // execute query
+        $stmt->execute();
+
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // set values to object properties
+        $this->productName = $row['productName'];
+        $this->productDesc = $row['productDesc'];
+        $this->productTitle = $row['productTitle'];
+        $this->price = $row['price'];
+
+    }
+
     function create()
     {
 
@@ -56,6 +89,45 @@ class Product
             return true;
         }
         return false;
+    }
+
+    function update()
+    {
+
+        // update query
+        $query = "UPDATE " . $this->table_name . "
+                SET
+                    productName = :productName,
+                    productDesc = :productDesc,
+                    productTitle = :productTitle,
+                    price = :price
+                WHERE
+                    productId = :productId";
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->productName = htmlspecialchars(strip_tags($this->productName));
+        $this->productDesc = htmlspecialchars(strip_tags($this->productDesc));
+        $this->productTitle = htmlspecialchars(strip_tags($this->productTitle));
+        $this->price = htmlspecialchars(strip_tags($this->price));
+        $this->productId = htmlspecialchars(strip_tags($this->productId));
+
+        // bind the values
+        $stmt->bindParam(':productName', $this->productName);
+        $stmt->bindParam(':productDesc', $this->productDesc);
+        $stmt->bindParam(':productTitle', $this->productTitle);
+        $stmt->bindParam(':price', $this->price);
+        $stmt->bindParam(':productId', $this->productId);
+
+        // execute the query
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        return false;
+
     }
 
     function delete()

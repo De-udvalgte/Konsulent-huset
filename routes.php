@@ -8,9 +8,13 @@ get('/konsulent-huset', 'view/index.php');
 // views:
 get('/konsulent-huset/products', 'view/products/index.php');
 get('/konsulent-huset/products/create', 'view/products/create.php');
+get('/konsulent-huset/products/edit/$id', 'view/products/edit.php');
+get('/konsulent-huset/products/page/$id', 'view/products/page.php');
 // endpoints:
+get('/konsulent-huset/api/products/$id', 'api/endpoints/products/get_by_id.php');
 get('/konsulent-huset/api/products', 'api/endpoints/products/get_all.php');
 post('/konsulent-huset/products/product', 'api/endpoints/products/create.php');
+post('/konsulent-huset/products/edit/$id', 'api/endpoints/products/update.php');
 get('/konsulent-huset/products/delete/$id', 'api/endpoints/products/delete.php');
 
 // Login / Register / Logout

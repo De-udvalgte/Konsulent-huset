@@ -1,11 +1,11 @@
-<?php include 'components/header.php'; ?>
-<?php $result = file_get_contents('http://localhost/konsulent-huset/api/users/' . $_SESSION["userId"]) ?>
+<?php $result = file_get_contents('http://localhost/konsulent-huset/api/users'); ?>
+
+<?php include 'view/components/header.php'; ?>
 <main role="main" class="container">
     <div class="row">
         <div class="col">
-            <h1>Profile</h1>
+            <h1>Users</h1>
 
-            <button type="button" class="btn btn-primary" id="editBtn">Edit</button>
             <table class="table">
 
                 <tr>
@@ -50,10 +50,5 @@
         </div>
     </div>
 </main>
-<script>
-    var btn = document.getElementById('editBtn');
-    btn.addEventListener('click', function() {
-        document.location.href = 'http://localhost/konsulent-huset/profile/edit';
-    });
-</script>
-<?php include 'components/footer.php'; ?>
+
+<?php include 'view/components/footer.php'; ?>

@@ -17,18 +17,51 @@ class Product
 
     function read()
     {
-        $query = "SELECT * FROM products ;";
+        $query = "SELECT * FROM " . $this->table_name;
 
         // prepare the query
         $stmt = $this->conn->prepare($query);
 
         $stmt->execute();
 
-//        return json_encode($stmt->fetchAll());
         return $stmt;
     }
 
-    function create(){
+    function get_by_id()
+    {
+        $query = "SELECT * 
+            FROM 
+                " . $this->table_name . " 
+            WHERE 
+                productId = ?
+            LIMIT
+                0,1";
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->productId = htmlspecialchars(strip_tags($this->productId));
+
+        // bind the values
+        $stmt->bindParam(1, $this->productId);
+
+        // execute query
+        $stmt->execute();
+
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // set values to object properties
+        $this->productName = $row['productName'];
+        $this->productDesc = $row['productDesc'];
+        $this->productTitle = $row['productTitle'];
+        $this->price = $row['price'];
+
+    }
+
+    function create()
+    {
 
         $query = "INSERT INTO " . $this->table_name . "
             SET
@@ -52,9 +85,71 @@ class Product
         $stmt->bindParam(':price', $this->price);
 
         // execute the query, also check if query was successful
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             return true;
         }
+        return false;
+    }
+
+    function update()
+    {
+
+        // update query
+        $query = "UPDATE " . $this->table_name . "
+                SET
+                    productName = :productName,
+                    productDesc = :productDesc,
+                    productTitle = :productTitle,
+                    price = :price
+                WHERE
+                    productId = :productId";
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->productName = htmlspecialchars(strip_tags($this->productName));
+        $this->productDesc = htmlspecialchars(strip_tags($this->productDesc));
+        $this->productTitle = htmlspecialchars(strip_tags($this->productTitle));
+        $this->price = htmlspecialchars(strip_tags($this->price));
+        $this->productId = htmlspecialchars(strip_tags($this->productId));
+
+        // bind the values
+        $stmt->bindParam(':productName', $this->productName);
+        $stmt->bindParam(':productDesc', $this->productDesc);
+        $stmt->bindParam(':productTitle', $this->productTitle);
+        $stmt->bindParam(':price', $this->price);
+        $stmt->bindParam(':productId', $this->productId);
+
+        // execute the query
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+    function delete()
+    {
+
+        // delete query
+        $query = "DELETE FROM " . $this->table_name . " WHERE productId = ?";
+        print_r($query);
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        //$this->productId = htmlspecialchars(strip_tags($this->productId));
+
+        // bind id of record to delete
+        $stmt->bindParam(1, $this->productId);
+
+        // execute query
+        if ($stmt->execute()) {
+            return true;
+        }
+
         return false;
     }
 

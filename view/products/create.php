@@ -1,8 +1,8 @@
-<?php include 'components/header.php'; ?>
+<?php include 'view/components/header.php'; ?>
 <main role="main" class="container">
     <div class="row">
-        <div class="col">
-            <h1>Products</h1>
+        <div class="col pt-5">
+            <h1 class="pt-5">Products</h1>
             <form action="product" method="POST">
                 <div class="form-group">
                     <label for="productName">Name</label>
@@ -27,4 +27,4 @@
     </div>
 </main>
 
-<?php include 'components/footer.php'; ?>
+<?php include 'view/components/footer.php'; ?>

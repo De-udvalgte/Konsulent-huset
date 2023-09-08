@@ -18,8 +18,8 @@ $user->userId = $userId;
 $user->firstName = $_POST["firstName"];
 $user->lastName = $_POST["lastName"];
 $user->email = $_POST["email"];
-$user->password = $_POST["password"];
-$user->rolesId = $_POST["rolesId"];
+//$user->password = $_POST["password"];
+//$user->rolesId = $_POST["rolesId"];
 
 
 if (
@@ -27,8 +27,8 @@ if (
     !empty($user->firstName) &&
     !empty($user->lastName) &&
     !empty($user->email) &&
-    !empty($user->password) &&
-    !empty($user->rolesId) &&
+    //!empty($user->password) &&
+    //!empty($user->rolesId) &&
     $user->update()
 
 ) {
@@ -38,6 +38,11 @@ if (
     header("Location: /konsulent-huset");
     // display message: user was updated
     echo json_encode(array("message" => "User was updated."));
+    // update session variables
+    session_start();
+    $_SESSION["firstName"] = $user->firstName;
+    $_SESSION["lastName"] = $user->lastName;
+    $_SESSION["email"] = $user->email;
 }
 // message if unable to update user
 else {

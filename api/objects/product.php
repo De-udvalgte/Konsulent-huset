@@ -17,18 +17,18 @@ class Product
 
     function read()
     {
-        $query = "SELECT * FROM products ;";
+        $query = "SELECT * FROM " . $this->table_name;
 
         // prepare the query
         $stmt = $this->conn->prepare($query);
 
         $stmt->execute();
 
-//        return json_encode($stmt->fetchAll());
         return $stmt;
     }
 
-    function create(){
+    function create()
+    {
 
         $query = "INSERT INTO " . $this->table_name . "
             SET
@@ -52,9 +52,32 @@ class Product
         $stmt->bindParam(':price', $this->price);
 
         // execute the query, also check if query was successful
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             return true;
         }
+        return false;
+    }
+
+    function delete()
+    {
+
+        // delete query
+        $query = "DELETE FROM " . $this->table_name . " WHERE productId = ?";
+        print_r($query);
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        //$this->productId = htmlspecialchars(strip_tags($this->productId));
+
+        // bind id of record to delete
+        $stmt->bindParam(1, $this->productId);
+
+        // execute query
+        if ($stmt->execute()) {
+            return true;
+        }
+
         return false;
     }
 

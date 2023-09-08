@@ -39,7 +39,9 @@
                         </td>
                         <td><a class="action" href="">View</a></td>
                         <td><a class="action" href="">Edit</a></td>
-                        <td><a class="action" href="">Delete</a></td>
+                        <td>
+                            <a class="action" href="<?php echo "products/delete/" . $product['productId']; ?>">Delete</a>
+                        </td>
                     </tr>
                     <?php
                 }

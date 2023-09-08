@@ -11,6 +11,7 @@ get('/konsulent-huset/products/create', 'view/products/create_product.php');
 // api:
 get('/konsulent-huset/api/products', 'api/endpoints/products/get_all.php');
 post('/konsulent-huset/products/product', 'api/endpoints/products/create.php');
+get('/konsulent-huset/products/delete/$id', 'api/endpoints/products/delete.php');
 
 //Login
 get('/konsulent-huset/login', 'view/login_page.php');

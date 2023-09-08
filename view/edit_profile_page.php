@@ -1,12 +1,12 @@
 <?php include 'components/header.php'; ?>
-<?php $result = file_get_contents('http://localhost/konsulent-huset/api/users/' . $_SESSION["userId"]) ?>
+<!-- <?php $result = file_get_contents('http://localhost/konsulent-huset/api/users/' . $_SESSION["userId"]) ?> -->
 <main role="main" class="container">
     <div class="row">
         <div class="col">
-            <h1>Profile</h1>
+            <h1>Edit profile</h1>
 
             <button type="button" class="btn btn-primary" id="editBtn">Edit</button>
-            <table class="table">
+            <!-- <table class="table">
 
                 <tr>
                     <th>Id</th>
@@ -46,14 +46,14 @@
                 <?php
                 };
                 ?>
-            </table>
+            </table> -->
         </div>
     </div>
 </main>
 <script>
     var btn = document.getElementById('editBtn');
     btn.addEventListener('click', function() {
-        document.location.href = 'http://localhost/konsulent-huset/hello';
+        document.location.href = 'http://localhost/konsulent-huset/profile/edit';
     });
 </script>
 <?php include 'components/footer.php'; ?>

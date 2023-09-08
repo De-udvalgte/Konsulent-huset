@@ -75,12 +75,13 @@ class User
         // sanitize
         $this->userId = htmlspecialchars(strip_tags($this->userId));
 
+        // bind given userId value
         $bind = array('id' => $this->userId);
 
         // prepare the query
         $stmt = $this->conn->prepare($query);
 
-        // bind given userId value
+
         $stmt->execute($bind);
 
         return $stmt;

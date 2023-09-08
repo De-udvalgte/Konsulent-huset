@@ -15,8 +15,10 @@
                     <th>Description</th>
                     <th>Price / Hour</th>
                     <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
+                    <?php if ($_SESSION["rolesId"] === 2) { ?>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    <?php } ?>
                 </tr>
 
                 <?php foreach (json_decode($result, true) as $product) { ?>
@@ -37,11 +39,14 @@
                         <td>
                             <?php echo htmlspecialchars($product["price"]) ?>
                         </td>
+
                         <td><a class="action" href="">View</a></td>
-                        <td><a class="action" href="">Edit</a></td>
-                        <td>
-                            <a class="action" href="<?php echo "products/delete/" . $product['productId']; ?>">Delete</a>
-                        </td>
+                        <?php if ($_SESSION["rolesId"] === 2) { ?>
+                            <td><a class="action" href="">Edit</a></td>
+                            <td>
+                                <a class="action" href="<?php echo "products/delete/" . $product['productId']; ?>">Delete</a>
+                            </td>
+                        <?php } ?>
                     </tr>
                     <?php
                 }

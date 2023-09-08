@@ -1,4 +1,4 @@
-<?php include 'components/header.php'; ?>
+<?php include 'view/components/header.php'; ?>
 <?php $result = file_get_contents('http://localhost/konsulent-huset/api/users/' . $_SESSION["userId"]) ?>
 <main role="main" class="container">
     <div class="row">
@@ -56,4 +56,4 @@
         document.location.href = 'http://localhost/konsulent-huset/profile/edit';
     });
 </script>
-<?php include 'components/footer.php'; ?>
+<?php include 'view/components/footer.php'; ?>

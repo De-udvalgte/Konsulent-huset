@@ -1,6 +1,6 @@
 <?php $result = file_get_contents('http://localhost/konsulent-huset/api/users'); ?>
 
-<?php include 'components/header.php'; ?>
+<?php include 'view/components/header.php'; ?>
 <main role="main" class="container">
     <div class="row">
         <div class="col">
@@ -51,4 +51,4 @@
     </div>
 </main>
 
-<?php include 'components/footer.php'; ?>
+<?php include 'view/components/footer.php'; ?>

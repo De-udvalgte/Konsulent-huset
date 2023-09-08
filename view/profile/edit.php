@@ -1,15 +1,12 @@
-<?php include 'components/header.php'; ?>
+<?php include 'view/components/header.php'; ?>
 <?php $result = file_get_contents('http://localhost/konsulent-huset/api/users/' . $_SESSION["userId"]) ?>
 <main role="main" class="container">
     <div class="row">
-        <div class="col">
-            </br>
-            </br>
-            </br>
-            <h1>Edit profile</h1>
+        <div class="col pt-5">
+            <h1 class="pt-5">Edit profile</h1>
 
 
-            <form action=<?php echo "/konsulent-huset/api/users/" . $_SESSION["userId"] ?> method="POST">
+            <form action=<?php echo "/konsulent-huset/profile/edit/" . $_SESSION["userId"] ?> method="POST">
                 <input type="hidden" id="rolesId" name="rolesId" value=<?php echo $_SESSION["rolesId"] ?>>
 
                 <div class="form-group">
@@ -44,8 +41,8 @@
 </main>
 <script>
     var btn = document.getElementById('editBtn');
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function () {
         document.location.href = 'http://localhost/konsulent-huset/profile/edit';
     });
 </script>
-<?php include 'components/footer.php'; ?>
+<?php include 'view/components/footer.php'; ?>

@@ -68,6 +68,24 @@ class User
         return $stmt;
     }
 
+    function getById()
+    {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE userId= :id";
+
+        // sanitize
+        $this->userId = htmlspecialchars(strip_tags($this->userId));
+
+        $bind = array('id' => $this->userId);
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        // bind given userId value
+        $stmt->execute($bind);
+
+        return $stmt;
+    }
+
     // check if given email exist in the database
     function emailExists()
     {

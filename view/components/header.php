@@ -29,6 +29,7 @@
                         <?php if ($_SESSION["rolesId"] === 2) { ?>
                             <a class="nav-item nav-link" href="/konsulent-huset/users">Users</a>
                         <?php } ?>
+                        <a class="nav-item nav-link" href="/konsulent-huset/profile">Profile</a>
                         <a class="nav-item nav-link" href="/konsulent-huset/logout">Logout</a>
                     <?php } ?>
 

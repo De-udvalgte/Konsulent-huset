@@ -17,5 +17,9 @@ post('/konsulent-huset/login_user', 'api/endpoints/login_user.php');
 get('/konsulent-huset/logout', 'api/endpoints/logout_user.php');
 //Users
 get('/konsulent-huset/users', 'view/users_page.php');
+get('/konsulent-huset/profile', 'view/profile_page.php');
+get('/konsulent-huset/profile/edit', 'view/edit_profile_page.php');
 
 get('/konsulent-huset/api/users', 'api/endpoints/get_users.php');
+get('/konsulent-huset/api/users/$userId', 'api/endpoints/get_user_by_id.php');
+post('/konsulent-huset/api/users/$userId', 'api/endpoints/update_user.php'); //update user

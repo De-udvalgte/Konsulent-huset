@@ -56,6 +56,18 @@ class User
         return false;
     }
 
+    function getAll()
+    {
+        $query = "SELECT * FROM " . $this->table_name . ";";
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->execute();
+
+        return $stmt;
+    }
+
     // check if given email exist in the database
     function emailExists()
     {

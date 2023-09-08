@@ -1,52 +1,44 @@
 <?php include 'components/header.php'; ?>
-<!-- <?php $result = file_get_contents('http://localhost/konsulent-huset/api/users/' . $_SESSION["userId"]) ?> -->
+<?php $result = file_get_contents('http://localhost/konsulent-huset/api/users/' . $_SESSION["userId"]) ?>
 <main role="main" class="container">
     <div class="row">
         <div class="col">
+            </br>
+            </br>
+            </br>
             <h1>Edit profile</h1>
 
-            <button type="button" class="btn btn-primary" id="editBtn">Edit</button>
-            <!-- <table class="table">
 
-                <tr>
-                    <th>Id</th>
-                    <th>Type</th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>Email</th>
-                    <th>Created</th>
-                    <th>Last modified</th>
-                </tr>
+            <form action=<?php echo "/konsulent-huset/api/users/" . $_SESSION["userId"] ?> method="POST">
+                <input type="hidden" id="rolesId" name="rolesId" value=<?php echo $_SESSION["rolesId"] ?>>
 
-                <?php foreach (json_decode($result, true) as $user) { ?>
+                <div class="form-group">
+                    <label for="firstName">First name</label>
+                    <input class="form-control" type="text" id="firstName" name="firstName">
+                </div>
 
-                    <tr>
-                        <td>
-                            <?php echo htmlspecialchars($user["userId"]) ?>
-                        </td>
-                        <td>
-                            <?php echo htmlspecialchars($user["rolesId"] === 1 ? "User" : "Admin") ?>
-                        </td>
-                        <td>
-                            <?php echo htmlspecialchars($user["firstName"]) ?>
-                        </td>
-                        <td>
-                            <?php echo htmlspecialchars($user["lastName"]) ?>
-                        </td>
-                        <td>
-                            <?php echo htmlspecialchars($user["email"]) ?>
-                        </td>
-                        <td>
-                            <?php echo htmlspecialchars($user["created"]) ?>
-                        </td>
-                        <td>
-                            <?php echo htmlspecialchars($user["modified"]) ?>
-                        </td>
-                    </tr>
-                <?php
-                };
-                ?>
-            </table> -->
+                <div class="form-group">
+                    <label for="lastName">Last name</label>
+                    <input class="form-control" type="text" id="lastName" name="lastName" value=<?php echo $_SESSION["lastName"] ?>>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="form-control" type="email" id="email" name="email" value=<?php echo $_SESSION["email"] ?>>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input class="form-control" type="password" id="password" name="password">
+                </div>
+
+                <!-- TODO: repeat password and check password -->
+                <!-- <div class="form-group">
+                    <label for="password1">Repeat password</label>
+                    <input class="form-control" type="password1" id="password1" name="password1">
+                </div> -->
+                <button class="btn btn-primary mt-3" type="submit">Save</button>
+            </form>
         </div>
     </div>
 </main>

@@ -87,6 +87,48 @@ class User
         return $stmt;
     }
 
+    function update()
+    {
+        $query = "UPDATE " . $this->table_name . "
+        SET
+            firstName = :firstName,
+            lastName = :lastName,
+            email = :email,
+            password = :password,
+            rolesId = :rolesId 
+        WHERE userId = :userId";
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        //sanitize
+        $this->userId = htmlspecialchars(strip_tags($this->userId));
+        $this->firstName = htmlspecialchars(strip_tags($this->firstName));
+        $this->lastName = htmlspecialchars(strip_tags($this->lastName));
+        $this->email = htmlspecialchars(strip_tags($this->email));
+        $this->password = htmlspecialchars(strip_tags($this->password));
+        $this->rolesId = htmlspecialchars(strip_tags($this->rolesId));
+
+
+        // bind the values
+        $stmt->bindParam(':userId', $this->userId);
+        $stmt->bindParam(':firstName', $this->firstName);
+        $stmt->bindParam(':lastName', $this->lastName);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':rolesId', $this->rolesId);
+
+
+        //hash password, before saving
+        $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
+        $stmt->bindParam(':password', $password_hash);
+
+        // execute the query, also check if query was successful
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
     // check if given email exist in the database
     function emailExists()
     {

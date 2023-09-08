@@ -53,7 +53,7 @@
 <script>
     var btn = document.getElementById('editBtn');
     btn.addEventListener('click', function() {
-        document.location.href = 'http://localhost/konsulent-huset/hello';
+        document.location.href = 'http://localhost/konsulent-huset/profile/edit';
     });
 </script>
 <?php include 'components/footer.php'; ?>

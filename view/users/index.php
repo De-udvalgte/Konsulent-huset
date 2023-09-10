@@ -7,6 +7,7 @@
             <h1>Users</h1>
 
             <a href="/konsulent-huset/register_page">
+
                 <button class="btn btn-success mt-3">Create new</button>
             </a>
 
@@ -48,8 +49,15 @@
                             <?php echo htmlspecialchars($user["modified"]) ?>
                         </td>
                         <td>
-                            <button class="me-1 btn btn-primary"><i class="bi bi-pencil"></i></button>
-                            <button class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                            <form action="/konsulent-huset/profile/edit" method="GET">
+                                <input type="hidden" id="userId" name="userId" value=<?php echo $user["userId"] ?>>
+                                <input type="hidden" id="firstName" name="firstName" value=<?php echo $user["firstName"] ?>>
+                                <input type="hidden" id="lastName" name="lastName" value=<?php echo $user["lastName"] ?>>
+                                <input type="hidden" id="email" name="email" value=<?php echo $user["email"] ?>>
+                                <input type="hidden" id="rolesId" name="rolesId" value=<?php echo $user["rolesId"] ?>>
+                                <button class="me-1 btn btn-primary active"><i class="bi bi-pencil"></i></button>
+                            </form>
+                            <button class="btn btn-danger" type="submit"><i class="bi bi-trash3"></i></button>
                         </td>
                     </tr>
                 <?php

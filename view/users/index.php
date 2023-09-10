@@ -49,14 +49,7 @@
                             <?php echo htmlspecialchars($user["modified"]) ?>
                         </td>
                         <td>
-                            <form action="/konsulent-huset/profile/edit" method="GET">
-                                <input type="hidden" id="userId" name="userId" value=<?php echo $user["userId"] ?>>
-                                <input type="hidden" id="firstName" name="firstName" value=<?php echo $user["firstName"] ?>>
-                                <input type="hidden" id="lastName" name="lastName" value=<?php echo $user["lastName"] ?>>
-                                <input type="hidden" id="email" name="email" value=<?php echo $user["email"] ?>>
-                                <input type="hidden" id="rolesId" name="rolesId" value=<?php echo $user["rolesId"] ?>>
-                                <button class="me-1 btn btn-primary active"><i class="bi bi-pencil"></i></button>
-                            </form>
+                            <a class="me-1 btn btn-primary" href="<?php echo "/konsulent-huset/users/edit/" . $user['userId']; ?>"><i class="bi bi-pencil"></i></a>
                             <a class="btn btn-danger" href="<?php echo "/konsulent-huset/api/users/delete/" . $user['userId']; ?>"><i class="bi bi-trash3"></i></a>
                         </td>
                     </tr>

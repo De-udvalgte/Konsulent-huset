@@ -57,7 +57,7 @@
                                 <input type="hidden" id="rolesId" name="rolesId" value=<?php echo $user["rolesId"] ?>>
                                 <button class="me-1 btn btn-primary active"><i class="bi bi-pencil"></i></button>
                             </form>
-                            <button class="btn btn-danger" type="submit"><i class="bi bi-trash3"></i></button>
+                            <a class="btn btn-danger" href="<?php echo "/konsulent-huset/api/users/delete/" . $user['userId']; ?>"><i class="bi bi-trash3"></i></a>
                         </td>
                     </tr>
                 <?php

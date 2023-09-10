@@ -35,3 +35,4 @@ get('/konsulent-huset/profile/edit', 'view/profile/edit.php');
 get('/konsulent-huset/api/users', 'api/endpoints/users/get_all.php');
 get('/konsulent-huset/api/users/$userId', 'api/endpoints/users/get_by_id.php');
 post('/konsulent-huset/profile/edit/$userId', 'api/endpoints/users/update.php'); //update user
+get('/konsulent-huset/api/users/delete/$userId', 'api/endpoints/users/delete.php');

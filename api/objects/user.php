@@ -89,7 +89,7 @@ class User
 
         // execute the query
         $stmt->execute();
-        
+
         // get retrieved row
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -100,8 +100,6 @@ class User
         $this->created = $row['created'];
         $this->modified = $row['modified'];
         $this->rolesId = $row['rolesId'];
-        
-
     }
 
     function update()
@@ -184,6 +182,28 @@ class User
         }
 
         // return false if email does not exist in the database
+        return false;
+    }
+
+    function delete()
+    {
+        // delete query
+        $query = "DELETE FROM " . $this->table_name . " WHERE userId = ?";
+        print_r($query);
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        //$this->productId = htmlspecialchars(strip_tags($this->productId));
+
+        // bind id of record to delete
+        $stmt->bindParam(1, $this->userId);
+
+        // execute query
+        if ($stmt->execute()) {
+            return true;
+        }
+
         return false;
     }
 }

@@ -31,7 +31,15 @@ if (
 
     // set response code
     http_response_code(200);
-    header("Location: login");
+
+    session_start();
+    if (
+        !empty($_SESSION["rolesId"]) && $_SESSION["rolesId"] === 2
+    ) {
+        header("Location: users"); // redirects back to admins users page after registered a new user
+    } else {
+        header("Location: login");
+    };
     // display message: product was created
     echo json_encode(array("message" => "User was created."));
 }
@@ -40,5 +48,5 @@ else {
     // set response code
     http_response_code(400);
     // display message: unable to create product
-    echo json_encode(array("message" => "Unable to create user." , $user->email));
+    echo json_encode(array("message" => "Unable to create user.", $user->email));
 }

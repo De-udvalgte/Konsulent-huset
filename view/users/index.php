@@ -6,6 +6,10 @@
         <div class="col">
             <h1>Users</h1>
 
+            <a href="/konsulent-huset/register_page">
+                <button class="btn btn-success mt-3">Create new</button>
+            </a>
+
             <table class="table">
 
                 <tr>
@@ -16,6 +20,7 @@
                     <th>Email</th>
                     <th>Created</th>
                     <th>Last modified</th>
+                    <th></th>
                 </tr>
 
                 <?php foreach (json_decode($result, true) as $user) { ?>
@@ -41,6 +46,10 @@
                         </td>
                         <td>
                             <?php echo htmlspecialchars($user["modified"]) ?>
+                        </td>
+                        <td>
+                            <button class="me-1 btn btn-primary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-danger"><i class="bi bi-trash3"></i></button>
                         </td>
                     </tr>
                 <?php

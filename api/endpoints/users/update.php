@@ -28,18 +28,21 @@ if (
 
     // set response code
     http_response_code(200);
-    
+
     // redirect to profile page
     header("Location: /konsulent-huset/profile");
-    
+
+
     // display message: user was updated
     echo json_encode(array("message" => "User was updated."));
 
     // update session variables
     session_start();
-    $_SESSION["firstName"] = $user->firstName;
-    $_SESSION["lastName"] = $user->lastName;
-    $_SESSION["email"] = $user->email;
+    if ($userId == $_SESSION["userId"]) {
+        $_SESSION["firstName"] = $user->firstName;
+        $_SESSION["lastName"] = $user->lastName;
+        $_SESSION["email"] = $user->email;
+    }
 }
 // message if unable to update user
 else {

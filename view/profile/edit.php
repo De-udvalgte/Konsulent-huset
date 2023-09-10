@@ -1,5 +1,6 @@
 <?php include 'view/components/header.php'; ?>
 <?php
+
 if (isset($userId)) {
     $result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/users/' . $userId));
     $firstName = $result->firstName;
@@ -20,7 +21,7 @@ if (isset($userId)) {
         <div class="col pt-5">
             <h1 class="pt-5">Edit profile</h1>
 
-            <form action=<?php echo "/konsulent-huset/api/users/edit/" . $userId ?> method="POST">
+            <form action="<?php echo "/konsulent-huset/api/users/edit/" . $userId ?>" method="POST">
                 <input type="hidden" id="rolesId" name="rolesId" value=<?php echo $rolesId ?>>
 
                 <div class="form-group">

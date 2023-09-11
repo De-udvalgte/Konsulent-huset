@@ -22,21 +22,21 @@ if (isset($userId)) {
             <h1 class="pt-5">Edit profile</h1>
 
             <form action="<?php echo "/konsulent-huset/api/users/edit/" . $userId ?>" method="POST">
-                <input type="hidden" id="rolesId" name="rolesId" value=<?php echo $rolesId ?>>
+                <input type="hidden" id="rolesId" name="rolesId" value=<?php out($rolesId) ?>>
 
                 <div class="form-group">
                     <label for="firstName">First name</label>
-                    <input class="form-control" type="text" id="firstName" name="firstName" value=<?php echo $firstName ?>>
+                    <input class="form-control" type="text" id="firstName" name="firstName" value=<?php out($firstName) ?>>
                 </div>
 
                 <div class="form-group">
                     <label for="lastName">Last name</label>
-                    <input class="form-control" type="text" id="lastName" name="lastName" value=<?php echo $lastName ?>>
+                    <input class="form-control" type="text" id="lastName" name="lastName" value=<?php out($lastName) ?>>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input class="form-control" type="email" id="email" name="email" value=<?php echo $email ?>>
+                    <input class="form-control" type="email" id="email" name="email" value=<?php out($email) ?>>
                 </div>
 
                 <button class="btn btn-primary mt-3" type="submit">Save</button>

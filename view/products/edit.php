@@ -18,19 +18,19 @@ $price = $result->price;
             <form action="<?php echo "/konsulent-huset/products/edit/" . $id ?>" method="POST">
                 <div class="form-group">
                     <label for="productName">Name</label>
-                    <input class="form-control" type="text" id="productName" name="productName" value="<?php echo $productName; ?>">
+                    <input class="form-control" type="text" id="productName" name="productName" value="<?php out($productName) ?>">
                 </div>
                 <div class="form-group">
                     <label for="productDesc">Description</label>
-                    <input class="form-control" type="text" id="productDesc" name="productDesc" value="<?php echo $productDesc; ?>">
+                    <input class="form-control" type="text" id="productDesc" name="productDesc" value="<?php out($productDesc) ?>">
                 </div>
                 <div class="form-group">
                     <label for="productTitle">Title</label>
-                    <input class="form-control" type="text" id="productTitle" name="productTitle" value="<?php echo $productTitle; ?>">
+                    <input class="form-control" type="text" id="productTitle" name="productTitle" value="<?php out($productTitle) ?>">
                 </div>
                 <div class="form-group">
                     <label for="price">Price</label>
-                    <input class="form-control" type="number" id="price" name="price" value="<?php echo $price; ?>">
+                    <input class="form-control" type="number" id="price" name="price" value="<?php out($price) ?>">
                 </div>
 
                 <button class="btn btn-primary mt-3" type="submit">Update</button>

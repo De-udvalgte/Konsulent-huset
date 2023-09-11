@@ -15,28 +15,28 @@ $price = $result->price;
     <div class="row">
         <div class="col pt-5">
             <h1 class="pt-5">
-                <?php echo $productName; ?>
+                <?php out($productName) ?>
             </h1>
         </div>
     </div>
     <div class="row">
         <div class="col">
             <h5>
-                <?php echo $productTitle; ?>
+                <?php out($productTitle) ?>
             </h5>
         </div>
     </div>
     <div class="row">
         <div class="col">
             <h5>
-                <?php echo "$" . $price . " / hour" ?>
+                <?php  out("$" . $price . " / hour") ?>
             </h5>
         </div>
     </div>
     <div class="row">
         <div class="col">
             <p>
-                <?php echo $productDesc; ?>
+                <?php out($productDesc) ?>
             </p>
         </div>
     </div>

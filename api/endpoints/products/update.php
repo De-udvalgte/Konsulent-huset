@@ -1,5 +1,11 @@
 <?php
 
+if (!is_csrf_valid()) {
+    // The form is forged
+    // Code here
+    exit();
+}
+
 // include database and object files
 require('api/config/database.php');
 require('api/objects/product.php');

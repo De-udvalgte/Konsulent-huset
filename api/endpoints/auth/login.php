@@ -1,5 +1,11 @@
 <?php
 
+if (!is_csrf_valid()) {
+    // The form is forged
+    // Code here
+    exit();
+}
+
 require('api/config/database.php');
 require('api/objects/user.php');
 
@@ -14,14 +20,14 @@ $user = new User($db);
 $user->email = $_POST["email"];
 $email_exists = $user->emailExists();
 
-if($email_exists && password_verify($_POST["password"], $user->password )){
+if ($email_exists && password_verify($_POST["password"], $user->password)) {
     //set response code
     http_response_code(200);
     header("Location: /konsulent-huset");
     echo json_encode(array("message" => "Successful login."));
 }
 // login failed
-else{
+else {
     // set response code
     http_response_code(401);
     // tell the user login failed

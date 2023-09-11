@@ -4,7 +4,7 @@
         <div class="col">
             <h1>Login</h1>
             <form action="login_user" method="POST">
-
+                <?php set_csrf() ?>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input class="form-control" type="email" id="email" name="email">

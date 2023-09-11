@@ -1,5 +1,11 @@
 <?php
 
+if (!is_csrf_valid()) {
+    // The form is forged
+    // Code here
+    exit();
+}
+
 require('api/config/database.php');
 require('api/objects/user.php');
 
@@ -39,7 +45,8 @@ if (
         header("Location: users"); // redirects back to admins users page after registered a new user
     } else {
         header("Location: login");
-    };
+    }
+    ;
     // display message: product was created
     echo json_encode(array("message" => "User was created."));
 }

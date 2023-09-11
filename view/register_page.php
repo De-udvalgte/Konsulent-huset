@@ -4,7 +4,7 @@
         <div class="col">
             <h1>Create User</h1>
             <form action="register_user" method="POST">
-
+                <?php set_csrf() ?>
                 <div class="form-group">
                     <label for="firstName">First name</label>
                     <input class="form-control" type="text" id="firstName" name="firstName">

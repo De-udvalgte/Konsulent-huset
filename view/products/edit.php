@@ -1,4 +1,4 @@
-<?php 
+<?php
 $result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/products/' . $id));
 
 $productName = $result->productName;
@@ -16,17 +16,21 @@ $price = $result->price;
         <div class="col pt-5">
             <h1 class="pt-5">Edit Product</h1>
             <form action="<?php echo "/konsulent-huset/products/edit/" . $id ?>" method="POST">
+                <?php set_csrf() ?>
                 <div class="form-group">
                     <label for="productName">Name</label>
-                    <input class="form-control" type="text" id="productName" name="productName" value="<?php out($productName) ?>">
+                    <input class="form-control" type="text" id="productName" name="productName"
+                        value="<?php out($productName) ?>">
                 </div>
                 <div class="form-group">
                     <label for="productDesc">Description</label>
-                    <input class="form-control" type="text" id="productDesc" name="productDesc" value="<?php out($productDesc) ?>">
+                    <input class="form-control" type="text" id="productDesc" name="productDesc"
+                        value="<?php out($productDesc) ?>">
                 </div>
                 <div class="form-group">
                     <label for="productTitle">Title</label>
-                    <input class="form-control" type="text" id="productTitle" name="productTitle" value="<?php out($productTitle) ?>">
+                    <input class="form-control" type="text" id="productTitle" name="productTitle"
+                        value="<?php out($productTitle) ?>">
                 </div>
                 <div class="form-group">
                     <label for="price">Price</label>

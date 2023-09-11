@@ -22,6 +22,7 @@ if (isset($userId)) {
             <h1 class="pt-5">Edit profile</h1>
 
             <form action="<?php echo "/konsulent-huset/api/users/edit/" . $userId ?>" method="POST">
+                <?php set_csrf() ?>
                 <input type="hidden" id="rolesId" name="rolesId" value=<?php out($rolesId) ?>>
 
                 <div class="form-group">

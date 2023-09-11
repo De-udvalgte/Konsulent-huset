@@ -15,10 +15,8 @@ $rolesId = $result->rolesId;
         <div class="col">
             <h1>Profile</h1>
 
-            <a href="/konsulent-huset/profile/edit">
-                <button class="btn btn-primary mt-3">Edit</button>
-            </a>
-
+            <a class="btn btn-primary mt-3" href="/konsulent-huset/profile/edit">Edit</a>
+            <a class="btn btn-danger mt-3" href=<?php echo "/konsulent-huset/api/users/delete/" .  $userId ?>>Delete</a>
             <table class="table">
 
                 <tr>

@@ -19,7 +19,11 @@ if (!isset($_SESSION["userId"])) {
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Konsulent-Huset</a>
+            <div class="logo">
+            <a href="#" title="logo"></a>
+                    <img src="images/KHLOGO.png" alt="site logo" class="img-responsive">
+                </a>
+            </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

@@ -1,1 +1,14 @@
-body { padding-top: 5rem; }
+body { 
+    padding-top: 10rem; 
+}
+
+.img-responsive { 
+    width: 220px; 
+    overflow: visible;
+    padding-top: 0;
+    padding-bottom: 0; 
+}
+
+.nav-link {
+    color: white;
+}

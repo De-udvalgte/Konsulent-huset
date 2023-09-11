@@ -19,7 +19,12 @@ if ($user->delete()) {
     http_response_code(200);
 
     // tell the user
-    header("Location: /konsulent-huset/users");
+    session_start();
+    if ($_SESSION["userId"] == $userId) {
+        header("Location: /konsulent-huset/logout");
+    } else {
+        header("Location: /konsulent-huset/users");
+    }
     echo json_encode(array("message" => "User was deleted."));
 } else {
     // set response code - 503 service unavailable

@@ -52,7 +52,7 @@
       </div>
       <div class="w3-third">
         <h3>Rikke -CphBusiness</h3>
-        <img src="./images/rikke.png" class="w3-round w3-margin-bottom" alt="review" style="width:10%">
+        <img src="./images/rikke1.png" class="w3-round w3-margin-bottom" alt="review" style="width:10%">
         <h5>De Udvalgte, was tasked with creating our new system, 10/10 stars</h5>
       </div>
       <div class="w3-third">

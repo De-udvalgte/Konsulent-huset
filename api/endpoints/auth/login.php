@@ -25,12 +25,15 @@ if ($email_exists && password_verify($_POST["password"], $user->password)) {
     http_response_code(200);
     header("Location: /konsulent-huset");
     echo json_encode(array("message" => "Successful login."));
+    $_SESSION["login_failed"] = false;
 }
 // login failed
 else {
     // set response code
     http_response_code(401);
+    header("Location: /konsulent-huset/login");
+    $_SESSION["login_failed"] = true;
+
     // tell the user login failed
     echo json_encode(array("message" => "Login failed."));
-
 }

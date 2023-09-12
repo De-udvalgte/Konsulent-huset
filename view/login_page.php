@@ -34,15 +34,15 @@
             <?php } ?>
 
             <form action="login_user" method="POST" class="<?php if (isset($_SESSION["login_attempt"])) {
-                                                                echo "was-validated";
+                                                                out("was-validated");
                                                             } else {
-                                                                echo "needs-validation";
+                                                                out("needs-validation");
                                                             } ?>" novalidate>
                 <?php set_csrf() ?>
                 <div class="form-group email-needs-validation">
                     <label for="email" class="form-label">Email</label>
                     <input class="form-control" type="email" id="email" name="email" value="<?php if (isset($_SESSION["login_attempt"]["email"])) {
-                                                                                                echo $_SESSION["login_attempt"]["email"];
+                                                                                                out($_SESSION["login_attempt"]["email"]);
                                                                                             } ?>" required>
                     <div class="invalid-feedback">
                         Please provide a valid email.

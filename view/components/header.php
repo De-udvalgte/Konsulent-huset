@@ -14,7 +14,7 @@ if (!isset($_SESSION["userId"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konsulent-Huset</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="./view/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/konsulent-huset/view/css/custom.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
@@ -23,7 +23,7 @@ if (!isset($_SESSION["userId"])) {
         <div class="container-fluid">
             <div class="logo">
                 <a href="#" title="logo"></a>
-                <img src="./images/KHLOGO.png" alt="site logo" class="img-responsive">
+                <img src="/konsulent-huset/images/KHLOGO.png" alt="site logo" class="img-responsive">
                 </a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

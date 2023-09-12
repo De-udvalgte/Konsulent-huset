@@ -1,4 +1,5 @@
 <?php
+session_name("konsulent_huset");
 session_start();
 unset($_SESSION["userId"]);
 unset($_SESSION["firstName"]);

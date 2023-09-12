@@ -19,3 +19,13 @@ get('/konsulent-huset/logout', 'api/endpoints/logout_user.php');
 get('/konsulent-huset/users', 'view/users_page.php');
 
 get('/konsulent-huset/api/users', 'api/endpoints/get_users.php');
+
+
+//Orders
+get('/konsulent-huset/orders', 'view/orders/orders_page.php');
+get('/konsulent-huset/edit_order', 'view/orders/edit_order_page.php');
+get('/konsulent-huset/api/orders/$userId', 'api/endpoints/orders/get_orders.php');
+get('/konsulent-huset/api/orders', 'api/endpoints/orders/get_orders.php');
+post('/konsulent-huset/api/order', 'api/endpoints/orders/create_order.php');
+delete('/konsulent-huset/api/order/$orderId', 'api/endpoints/orders/delete_order.php');
+put('/konsulent-huset/api/order/$orderId', 'api/endpoints/orders/delete_order.php');

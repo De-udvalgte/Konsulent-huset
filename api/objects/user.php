@@ -105,7 +105,7 @@ class User
             $this->password = $row['password'];
             $this->rolesId = $row['rolesId'];
 
-
+            session_name("konsulent_huset");
             session_start();
             $_SESSION["userId"] = $this->userId;
             $_SESSION["firstName"] = $this->firstName;

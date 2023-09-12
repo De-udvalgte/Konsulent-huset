@@ -88,9 +88,9 @@ if ($_SESSION['rolesId'] == 1) {
 
                         <tr>
                             <?php if ($_SESSION['rolesId'] === 2) {
-                                echo "<td>" . out($order["orderId"]) . "</td>" .
-                                    "<td>" . out($order["userId"]) . "</td>" .
-                                    "<td>" . out($order["productId"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($order["orderId"]) . "</td>" .
+                                    "<td>" . htmlspecialchars($order["userId"]) . "</td>" .
+                                    "<td>" . htmlspecialchars($order["productId"]) . "</td>";
                             } ?>
                             <td>
                                 <?php out($order["orderNumber"]) ?>

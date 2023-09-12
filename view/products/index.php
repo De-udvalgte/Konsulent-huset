@@ -28,28 +28,28 @@ $result = file_get_contents('http://localhost/konsulent-huset/api/products');
 
                     <tr>
                         <td>
-                            <?php echo htmlspecialchars($product["productId"]) ?>
+                            <?php out($product["productId"]) ?>
                         </td>
                         <td>
-                            <?php echo htmlspecialchars($product["productName"]) ?>
+                            <?php out($product["productName"]) ?>
                         </td>
                         <td>
-                            <?php echo htmlspecialchars($product["productTitle"]) ?>
+                            <?php out($product["productTitle"]) ?>
                         </td>
                         <td>
-                            <?php echo htmlspecialchars($product["productDesc"]) ?>
+                            <?php out($product["productDesc"]) ?>
                         </td>
                         <td>
-                            <?php echo htmlspecialchars($product["price"]) ?>
+                            <?php out($product["price"]) ?>
                         </td>
 
-                        <td><a class="action" href="<?php echo "products/page/" . $product['productId']; ?>">View</a></td>
+                        <td><a class="action" href="<?php out("products/page/" . $product['productId']) ?>">View</a></td>
                         <?php if ($_SESSION["rolesId"] === 2) { ?>
                             <td>
-                                <a class="action" href="<?php echo "products/edit/" . $product['productId']; ?>">Edit</a>
+                                <a class="action" href="<?php out("products/edit/" . $product['productId']) ?>">Edit</a>
                             </td>
                             <td>
-                                <a class="action" href="<?php echo "products/delete/" . $product['productId']; ?>">Delete</a>
+                                <a class="action" href="<?php out("products/delete/" . $product['productId']) ?>">Delete</a>
                             </td>
                         <?php } ?>
                     </tr>

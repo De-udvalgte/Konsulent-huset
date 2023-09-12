@@ -1,5 +1,11 @@
 <?php
 
+if (!is_csrf_valid()) {
+    // The form is forged
+    // Code here
+    exit();
+}
+
 require('api/config/database.php');
 require('api/objects/product.php');
 
@@ -21,13 +27,13 @@ $product->price = $_POST["price"];
 
 
 // create the product
-if(
+if (
     !empty($product->productName) &&
     !empty($product->productDesc) &&
     !empty($product->productTitle) &&
     !empty($product->price) &&
     $product->create()
-){
+) {
     // set response code
     http_response_code(200);
     header("Location: /konsulent-huset/products");
@@ -35,7 +41,7 @@ if(
     echo json_encode(array("message" => "Product was created."));
 }
 // message if unable to create product
-else{
+else {
     // set response code
     http_response_code(400);
     // display message: unable to create product

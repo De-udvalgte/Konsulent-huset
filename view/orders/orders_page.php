@@ -88,27 +88,27 @@ if ($_SESSION['rolesId'] == 1) {
 
                         <tr>
                             <?php if ($_SESSION['rolesId'] === 2) {
-                                echo "<td>" . htmlspecialchars($order["orderId"]) . "</td>" .
-                                    "<td>" . htmlspecialchars($order["userId"]) . "</td>" .
-                                    "<td>" . htmlspecialchars($order["productId"]) . "</td>";
+                                echo "<td>" . out($order["orderId"]) . "</td>" .
+                                    "<td>" . out($order["userId"]) . "</td>" .
+                                    "<td>" . out($order["productId"]) . "</td>";
                             } ?>
                             <td>
-                                <?php echo htmlspecialchars($order["orderNumber"]) ?>
+                                <?php out($order["orderNumber"]) ?>
                             </td>
                             <td>
-                                <?php echo htmlspecialchars($order["productName"]) ?>
+                                <?php out($order["productName"]) ?>
                             </td>
                             <td>
-                                <?php echo htmlspecialchars($order["orderDate"]) ?>
+                                <?php out($order["orderDate"]) ?>
                             </td>
                             <td>
-                                <?php echo htmlspecialchars($order["startDate"]) ?>
+                                <?php out($order["startDate"]) ?>
                             </td>
                             <td>
-                                <?php echo htmlspecialchars($order["endDate"]) ?>
+                                <?php out($order["endDate"]) ?>
                             </td>
                             <td>
-                                <?php echo htmlspecialchars($order["address"]) ?>
+                                <?php out($order["address"]) ?>
                             </td>
                             <td>
                                 <button type="button" class="btn btn-danger btn-sm"

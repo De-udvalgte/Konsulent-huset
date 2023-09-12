@@ -4,6 +4,7 @@
         <div class="col pt-5">
             <h1 class="pt-5">Products</h1>
             <form action="product" method="POST">
+                <?php set_csrf() ?>
                 <div class="form-group">
                     <label for="productName">Name</label>
                     <input class="form-control" type="text" id="productName" name="productName">

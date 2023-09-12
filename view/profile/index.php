@@ -30,25 +30,25 @@ $rolesId = $result->rolesId;
                 </tr>
                 <tr>
                     <td>
-                        <?php echo htmlspecialchars($userId) ?>
+                        <?php out($userId) ?>
                     </td>
                     <td>
-                        <?php echo htmlspecialchars($rolesId === 1 ? "User" : "Admin") ?>
+                        <?php out($rolesId === 1 ? "User" : "Admin") ?>
                     </td>
                     <td>
-                        <?php echo htmlspecialchars($firstName) ?>
+                        <?php out($firstName) ?>
                     </td>
                     <td>
-                        <?php echo htmlspecialchars($lastName) ?>
+                        <?php out($lastName) ?>
                     </td>
                     <td>
-                        <?php echo htmlspecialchars($email) ?>
+                        <?php out($email) ?>
                     </td>
                     <td>
-                        <?php echo htmlspecialchars($created) ?>
+                        <?php out($created) ?>
                     </td>
                     <td>
-                        <?php echo htmlspecialchars($modified) ?>
+                        <?php out($modified) ?>
                     </td>
                 </tr>
 

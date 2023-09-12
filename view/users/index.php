@@ -28,29 +28,29 @@
 
                     <tr>
                         <td>
-                            <?php echo htmlspecialchars($user["userId"]) ?>
+                            <?php out($user["userId"]) ?>
                         </td>
                         <td>
-                            <?php echo htmlspecialchars($user["rolesId"] === 1 ? "User" : "Admin") ?>
+                            <?php out($user["rolesId"] === 1 ? "User" : "Admin") ?>
                         </td>
                         <td>
-                            <?php echo htmlspecialchars($user["firstName"]) ?>
+                            <?php out($user["firstName"]) ?>
                         </td>
                         <td>
-                            <?php echo htmlspecialchars($user["lastName"]) ?>
+                            <?php out($user["lastName"]) ?>
                         </td>
                         <td>
-                            <?php echo htmlspecialchars($user["email"]) ?>
+                            <?php out($user["email"]) ?>
                         </td>
                         <td>
-                            <?php echo htmlspecialchars($user["created"]) ?>
+                            <?php out($user["created"]) ?>
                         </td>
                         <td>
-                            <?php echo htmlspecialchars($user["modified"]) ?>
+                            <?php out($user["modified"]) ?>
                         </td>
                         <td>
-                            <a class="me-1 btn btn-primary" href="<?php echo "/konsulent-huset/users/edit/" . $user['userId']; ?>"><i class="bi bi-pencil"></i></a>
-                            <a class="btn btn-danger" href="<?php echo "/konsulent-huset/api/users/delete/" . $user['userId']; ?>"><i class="bi bi-trash3"></i></a>
+                            <a class="me-1 btn btn-primary" href="<?php out("/konsulent-huset/users/edit/" . $user['userId']) ?>"><i class="bi bi-pencil"></i></a>
+                            <a class="btn btn-danger" href="<?php out("/konsulent-huset/api/users/delete/" . $user['userId']) ?>"><i class="bi bi-trash3"></i></a>
                         </td>
                     </tr>
                 <?php

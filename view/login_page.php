@@ -26,28 +26,34 @@
     <div class="row">
         <div class="col">
             <h1>Login</h1>
-            <?php if (isset($_SESSION["login_failed"]) && !empty($_SESSION["login_failed"]) && $_SESSION["login_failed"] === true) { ?>
+            <?php if (isset($_SESSION["login_attempt"]) && !empty($_SESSION["login_attempt"]["hasFailed"]) && $_SESSION["login_attempt"]["hasFailed"] === true) { ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <i class="bi bi-exclamation-triangle me-2"></i></i> Login failed. Invalid email or password.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php } ?>
 
-            <form action="login_user" method="POST" class="needs-validation" novalidate>
+            <form action="login_user" method="POST" class="<?php if (isset($_SESSION["login_attempt"])) {
+                                                                echo "was-validated";
+                                                            } else {
+                                                                echo "needs-validation";
+                                                            } ?>" novalidate>
                 <?php set_csrf() ?>
-                <div class="form-group">
+                <div class="form-group email-needs-validation">
                     <label for="email" class="form-label">Email</label>
-                    <input class="form-control" type="email" id="email" name="email" required>
+                    <input class="form-control" type="email" id="email" name="email" value="<?php if (isset($_SESSION["login_attempt"]["email"])) {
+                                                                                                echo $_SESSION["login_attempt"]["email"];
+                                                                                            } ?>" required>
                     <div class="invalid-feedback">
                         Please provide a valid email.
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group password-needs-validation2">
                     <label for="password" class="form-label">Password</label>
-                    <input class="form-control" type="password" id="password" name="password" required>
+                    <input class="form-control password" type="password" id="password" name="password" required>
                     <div class="invalid-feedback">
-                        Please provide a password.
+                        Please provide a valid password.
                     </div>
                 </div>
 
@@ -62,19 +68,18 @@
         'use strict'
 
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll('.needs-validation')
-
         // Loop over them and prevent submission
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
+        Array.from(document.querySelectorAll('.email-needs-validation')).forEach(form => {
+            form.addEventListener('keypress', event => {
                 form.classList.add('was-validated')
             }, false)
         })
+        Array.from(document.querySelectorAll('.password-needs-validation2')).forEach(form => {
+            form.addEventListener('keypress', event => {
+                form.classList.add('was-validated')
+            }, false)
+        })
+
     })()
 </script>
 <?php include 'components/footer.php'; ?>

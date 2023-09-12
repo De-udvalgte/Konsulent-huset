@@ -68,6 +68,71 @@ class User
         return $stmt;
     }
 
+    function getById()
+    {
+        $query = "SELECT * 
+            FROM 
+                " . $this->table_name . " 
+            WHERE 
+                userId= ?
+            LIMIT
+                0,1";
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->userId = htmlspecialchars(strip_tags($this->userId));
+
+        // bind the values
+        $stmt->bindParam(1, $this->userId);
+
+        // execute the query
+        $stmt->execute();
+
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // set values to object properties
+        $this->firstName = $row['firstName'];
+        $this->lastName = $row['lastName'];
+        $this->email = $row['email'];
+        $this->created = $row['created'];
+        $this->modified = $row['modified'];
+        $this->rolesId = $row['rolesId'];
+    }
+
+    function update()
+    {
+        $query = "UPDATE " . $this->table_name . "
+        SET
+            firstName = :firstName,
+            lastName = :lastName,
+            email = :email
+        WHERE userId = :userId";
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        //sanitize
+        //$this->userId = htmlspecialchars(strip_tags($this->userId));
+        $this->firstName = htmlspecialchars(strip_tags($this->firstName));
+        $this->lastName = htmlspecialchars(strip_tags($this->lastName));
+        $this->email = htmlspecialchars(strip_tags($this->email));
+
+        // bind the values
+        $stmt->bindParam(':userId', $this->userId);
+        $stmt->bindParam(':firstName', $this->firstName);
+        $stmt->bindParam(':lastName', $this->lastName);
+        $stmt->bindParam(':email', $this->email);
+
+        // execute the query, also check if query was successful
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
     // check if given email exist in the database
     function emailExists()
     {
@@ -117,6 +182,28 @@ class User
         }
 
         // return false if email does not exist in the database
+        return false;
+    }
+
+    function delete()
+    {
+        // delete query
+        $query = "DELETE FROM " . $this->table_name . " WHERE userId = ?";
+        print_r($query);
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        //$this->productId = htmlspecialchars(strip_tags($this->productId));
+
+        // bind id of record to delete
+        $stmt->bindParam(1, $this->userId);
+
+        // execute query
+        if ($stmt->execute()) {
+            return true;
+        }
+
         return false;
     }
 }

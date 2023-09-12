@@ -1,10 +1,15 @@
 <?php $result = file_get_contents('http://localhost/konsulent-huset/api/users'); ?>
 
-<?php include 'components/header.php'; ?>
+<?php include 'view/components/header.php'; ?>
 <main role="main" class="container">
     <div class="row">
         <div class="col">
             <h1>Users</h1>
+
+            <a href="/konsulent-huset/register_page">
+
+                <button class="btn btn-success mt-3">Create new</button>
+            </a>
 
             <table class="table">
 
@@ -16,6 +21,7 @@
                     <th>Email</th>
                     <th>Created</th>
                     <th>Last modified</th>
+                    <th></th>
                 </tr>
 
                 <?php foreach (json_decode($result, true) as $user) { ?>
@@ -42,6 +48,10 @@
                         <td>
                             <?php echo htmlspecialchars($user["modified"]) ?>
                         </td>
+                        <td>
+                            <a class="me-1 btn btn-primary" href="<?php echo "/konsulent-huset/users/edit/" . $user['userId']; ?>"><i class="bi bi-pencil"></i></a>
+                            <a class="btn btn-danger" href="<?php echo "/konsulent-huset/api/users/delete/" . $user['userId']; ?>"><i class="bi bi-trash3"></i></a>
+                        </td>
                     </tr>
                 <?php
                 };
@@ -51,4 +61,4 @@
     </div>
 </main>
 
-<?php include 'components/footer.php'; ?>
+<?php include 'view/components/footer.php'; ?>

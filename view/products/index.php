@@ -1,6 +1,9 @@
-<?php $result = file_get_contents('http://localhost/konsulent-huset/api/products'); ?>
+<?php
+$result = file_get_contents('http://localhost/konsulent-huset/api/products');
 
-<?php include 'components/header.php'; ?>
+?>
+
+<?php include 'view/components/header.php'; ?>
 <main role="main" class="container">
     <div class="row">
         <div class="col">
@@ -13,7 +16,12 @@
                     <th>Name</th>
                     <th>Title</th>
                     <th>Description</th>
-                    <th>Price</th>
+                    <th>Price / Hour</th>
+                    <th>&nbsp;</th>
+                    <?php if ($_SESSION["rolesId"] === 2) { ?>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    <?php } ?>
                 </tr>
 
                 <?php foreach (json_decode($result, true) as $product) { ?>
@@ -34,6 +42,16 @@
                         <td>
                             <?php echo htmlspecialchars($product["price"]) ?>
                         </td>
+
+                        <td><a class="action" href="<?php echo "products/page/" . $product['productId']; ?>">View</a></td>
+                        <?php if ($_SESSION["rolesId"] === 2) { ?>
+                            <td>
+                                <a class="action" href="<?php echo "products/edit/" . $product['productId']; ?>">Edit</a>
+                            </td>
+                            <td>
+                                <a class="action" href="<?php echo "products/delete/" . $product['productId']; ?>">Delete</a>
+                            </td>
+                        <?php } ?>
                     </tr>
                     <?php
                 }
@@ -44,4 +62,4 @@
     </div>
 </main>
 
-<?php include 'components/footer.php'; ?>
+<?php include 'view/components/footer.php'; ?>

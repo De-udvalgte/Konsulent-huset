@@ -8,12 +8,13 @@ get('/konsulent-huset', 'view/index.php');
 
 //Orders
 get('/konsulent-huset/orders', 'view/orders/orders_page.php');
-get('/konsulent-huset/edit_order', 'view/orders/edit_order_page.php');
+get('/konsulent-huset/edit_order_page/$orderId', 'view/orders/edit_order_page.php');
 get('/konsulent-huset/api/orders/$userId', 'api/endpoints/orders/get_orders.php');
 get('/konsulent-huset/api/orders', 'api/endpoints/orders/get_orders.php');
+get('/konsulent-huset/api/order/$orderId', 'api/endpoints/orders/get_orders.php');
 post('/konsulent-huset/api/order', 'api/endpoints/orders/create_order.php');
 delete('/konsulent-huset/api/order/$orderId', 'api/endpoints/orders/delete_order.php');
-put('/konsulent-huset/api/order/$orderId', 'api/endpoints/orders/delete_order.php');
+post('/konsulent-huset/api/order/edit/$orderId', 'api/endpoints/orders/edit_order.php');
 // Products
 // views:
 get('/konsulent-huset/products', 'view/products/index.php');

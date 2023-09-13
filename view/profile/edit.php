@@ -63,5 +63,8 @@ if (isset($_SESSION['success_message'])) {
             </form>
         </div>
     </div>
+    <div class="row mt-5">
+        <a class="link" href="/konsulent-huset/profile">Go Back</a>
+    </div>
 </main>
 <?php include 'view/components/footer.php'; ?>

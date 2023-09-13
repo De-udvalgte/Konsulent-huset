@@ -27,12 +27,14 @@ if (isset($_SESSION['success_message'])) {
                     <?php out($error_message) ?>
                     </div>
             <?php } ?>
-            
+
             <h1>Products</h1>
             <table class="table">
 
                 <tr>
-                    <th>Id</th>
+                    <?php if ($_SESSION["rolesId"] == 2) { ?>
+                        <th>Id</th>
+                    <?php } ?>
                     <th>Name</th>
                     <th>Title</th>
                     <th>Description</th>
@@ -40,16 +42,18 @@ if (isset($_SESSION['success_message'])) {
                     <th>&nbsp;</th>
                     <?php if ($_SESSION["rolesId"] == 2) { ?>
                         <th>&nbsp;</th>
-                        <th>&nbsp;</th>
+
                     <?php } ?>
                 </tr>
 
                 <?php foreach (json_decode($result, true) as $product) { ?>
 
                     <tr>
-                        <td>
-                            <?php out($product["productId"]) ?>
-                        </td>
+                        <?php if ($_SESSION["rolesId"] == 2) { ?>
+                            <td>
+                                <?php out($product["productId"]) ?>
+                            </td>
+                        <?php } ?>
                         <td>
                             <?php out($product["productName"]) ?>
                         </td>
@@ -63,20 +67,25 @@ if (isset($_SESSION['success_message'])) {
                             <?php out($product["price"]) ?>
                         </td>
 
-                        <td><a class="action" href="<?php out("products/page/" . $product['productId']) ?>">View</a></td>
-                        <?php if ($_SESSION["rolesId"] == 2) { ?>
-                            <td>
-                                <a class="action" href="<?php out("products/edit/" . $product['productId']) ?>">Edit</a>
-                            </td>
-                            <td>
-                                <a class="action" href="<?php out("products/delete/" . $product['productId']) ?>">Delete</a>
-                            </td>
-                        <?php } ?>
+                        <td><a class="me-1 btn btn-success" href="<?php out("products/page/" . $product['productId']) ?>"><i
+                                    class="bi bi-info-circle"></i></a>
+                            <?php if ($_SESSION["rolesId"] == 2) { ?>
+
+                                <a class="me-1 btn btn-primary" href="<?php out("products/edit/" . $product['productId']) ?>"><i
+                                        class="bi bi-pencil"></i></a>
+
+                                <a class="me-1 btn btn-danger"
+                                    href="<?php out("products/delete/" . $product['productId']) ?>"><i
+                                        class="bi bi-trash3"></i></a>
+                            <?php } ?>
+                        </td>
                     </tr>
                     <?php
-                }
-                ;
-                ?>
+                } ?>
+
+
+
+
             </table>
         </div>
     </div>

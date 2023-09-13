@@ -58,8 +58,6 @@ if (!$authorized) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 extract($row);
 
-                $productName = $order->getProdNameByOrderId($orderId);
-
                 $order_item = array(
                     "orderId" => $orderId,
                     "orderNumber" => $orderNumber,

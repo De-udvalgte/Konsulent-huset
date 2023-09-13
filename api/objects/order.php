@@ -21,7 +21,7 @@ class Order
 
     function getAll()
     {
-        $query = "SELECT * FROM orders";
+        $query = "SELECT O.*, P.productName FROM orders O INNER JOIN products P ON O.productId = P.productId";
 
         // prepare the query
         $stmt = $this->conn->prepare($query);
@@ -36,7 +36,7 @@ class Order
 
     function getById($id)
     {
-        $query = "SELECT * FROM orders WHERE userId=" . $id;
+        $query = "SELECT O.*, P.productName FROM orders O INNER JOIN products P ON O.productId = P.productId WHERE userId=" . $id;
 
         // prepare the query
         $stmt = $this->conn->prepare($query);
@@ -52,7 +52,7 @@ class Order
 
     function getByOrderId($orderId)
     {
-        $query = "SELECT * FROM orders WHERE orderId=" . $orderId;
+        $query = "SELECT O.*, P.productName FROM orders O INNER JOIN products P ON O.productId = P.productId WHERE orderId=" . $orderId;
 
         // prepare the query
         $stmt = $this->conn->prepare($query);
@@ -62,26 +62,9 @@ class Order
         return $stmt;
     }
 
-    function getProdNameByOrderId($orderId)
-    {
-        $query = "SELECT p.productName FROM orders o INNER JOIN products p ON o.productId = p.productId WHERE o.orderId=" . $orderId;
-
-        // prepare the query
-        $stmt = $this->conn->prepare($query);
-
-        // execute the query
-        try {
-            $stmt->execute();
-        } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
-        }
-
-        return $stmt->fetchColumn();
-    }
-
     function ownsOrder($orderId, $userId)
     {
-        $query = "SELECT * FROM orders WHERE orderId=" . $orderId . " AND userId =" . $userId;
+        $query = "SELECT O.*, P.productName FROM orders O INNER JOIN products P ON O.productId = P.productId WHERE orderId=" . $orderId . " AND userId =" . $userId;
 
         // prepare the query
         $stmt = $this->conn->prepare($query);

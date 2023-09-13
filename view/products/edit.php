@@ -34,7 +34,7 @@ $price = $result->price;
                 </div>
                 <div class="form-group">
                     <label for="price">Price</label>
-                    <input class="form-control" type="number" id="price" name="price" value="<?php out($price) ?>">
+                    <input class="form-control" type="number" step="any" id="price" name="price" value="<?php out($price) ?>">
                 </div>
 
                 <button class="btn btn-primary mt-3" type="submit">Update</button>

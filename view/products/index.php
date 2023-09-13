@@ -17,7 +17,6 @@ if (isset($_SESSION['success_message'])) {
 <main role="main" class="container">
     <div class="row">
         <div class="col">
-            <h1>Products</h1>
 
             <?php if (isset($success_message)) { ?>
                 <div class="alert alert-success" role="alert">
@@ -28,7 +27,8 @@ if (isset($_SESSION['success_message'])) {
                     <?php out($error_message) ?>
                     </div>
             <?php } ?>
-
+            
+            <h1>Products</h1>
             <table class="table">
 
                 <tr>

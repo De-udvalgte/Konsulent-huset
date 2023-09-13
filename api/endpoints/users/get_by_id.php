@@ -3,6 +3,9 @@
 require('api/config/database.php');
 require('api/objects/user.php');
 
+session_name("konsulent_huset");
+session_start();
+
 // get database connection
 $database = new Database();
 $db = $database->getConnection();

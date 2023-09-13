@@ -6,6 +6,9 @@ if (!is_csrf_valid()) {
     exit();
 }
 
+session_name("konsulent_huset");
+session_start();
+
 require('api/config/database.php');
 require('api/objects/user.php');
 
@@ -42,7 +45,6 @@ if (
 
     // update session variables
     // && redirect to profile page
-    session_start();
     if ($_SESSION["userId"] == $userId) {
         $_SESSION["rolesId"] = $user->rolesId;
         $_SESSION["firstName"] = $user->firstName;

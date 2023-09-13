@@ -9,6 +9,9 @@ if (!is_csrf_valid()) {
 require('api/config/database.php');
 require('api/objects/product.php');
 
+session_name("konsulent_huset");
+session_start();
+
 // get database connection
 $database = new Database();
 $db = $database->getConnection();

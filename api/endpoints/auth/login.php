@@ -1,5 +1,8 @@
 <?php
 
+session_name("konsulent_huset");
+session_start();
+
 if (!is_csrf_valid()) {
     // The form is forged
     // Code here
@@ -24,9 +27,7 @@ if ($email_exists && password_verify($_POST["password"], $user->password)) {
     //set response code
     http_response_code(200);
 
-    //session_name("konsulent_huset");
-    //session_start();
-    
+
     $_SESSION["userId"] = $user->userId;
     $_SESSION["firstName"] = $user->firstName;
     $_SESSION["lastName"] = $user->lastName;

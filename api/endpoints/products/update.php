@@ -1,5 +1,8 @@
 <?php
 
+session_name("konsulent_huset");
+session_start();
+
 if (!is_csrf_valid()) {
     // The form is forged
     // Code here
@@ -9,9 +12,6 @@ if (!is_csrf_valid()) {
 // include database and object files
 require('api/config/database.php');
 require('api/objects/product.php');
-
-session_name("konsulent_huset");
-session_start();
 
 // get database connection
 $database = new Database();
@@ -40,11 +40,12 @@ if (
     // set response code - 200 ok
     http_response_code(200);
 
+    // set session success message
+    $_SESSION['success_message'] = "Product was updated";
+
     // redirect to products page
     header("Location: /konsulent-huset/products");
 
-    // tell the user
-    echo json_encode(array("message" => "Product was updated."));
 }
 
 // if unable to update the product, tell the user
@@ -53,8 +54,10 @@ else {
     // set response code - 503 service unavailable
     http_response_code(503);
 
-    // tell the user
-    echo json_encode(array("message" => "Unable to update product."));
+    // set session error message
+    $_SESSION['error_message'] = "Unable to update product";
+
+    header("Location: /konsulent-huset/products");
 
     // log update product failed
     trigger_error("ID: " . $_SESSION['userId'] . " was unable to update product with id: " . $id, E_USER_WARNING);

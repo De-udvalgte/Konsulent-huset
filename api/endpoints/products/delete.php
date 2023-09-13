@@ -21,15 +21,17 @@ if ($product->delete()) {
         // set response code - 200 ok
         http_response_code(200);
 
-        // tell the user
+        // set session success message
+        $_SESSION['success_message'] = "Product was deleted";
+        
         header("Location: /konsulent-huset/products");
-        echo json_encode(array("message" => "Product was deleted."));
+        
 } else {
         // set response code - 503 service unavailable
         http_response_code(503);
         
-        // tell the user
-        echo json_encode(array("message" => "Unable to delete product."));
+        // set session error message
+        $_SESSION['error_message'] = "Unable to delete product";
 
         // log delete product failed
         trigger_error("ID: " . $_SESSION['userId'] . " was unable to delete product with id: " . $id, E_USER_WARNING);

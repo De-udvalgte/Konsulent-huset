@@ -1,5 +1,8 @@
 <?php
 
+session_name("konsulent_huset");
+session_start();
+
 if (!is_csrf_valid()) {
     // The form is forged
     // Code here
@@ -8,9 +11,6 @@ if (!is_csrf_valid()) {
 
 require('api/config/database.php');
 require('api/objects/product.php');
-
-session_name("konsulent_huset");
-session_start();
 
 // get database connection
 $database = new Database();
@@ -39,16 +39,20 @@ if (
 ) {
     // set response code
     http_response_code(200);
+   
+     // set session success message
+     $_SESSION['success_message'] = "Product was created";
+   
     header("Location: /konsulent-huset/products");
-    // display message: product was created
-    echo json_encode(array("message" => "Product was created."));
+   
 }
 // message if unable to create product
 else {
     // set response code
     http_response_code(400);
-    // display message: unable to create product
-    echo json_encode(array("message" => "Unable to create product."));
+    
+    // set session error message
+    $_SESSION['error_message'] = "Unable to create product";
 
     // log create product failed
     trigger_error("ID: " . $_SESSION['userId'] . " was unable to create product with name: " . $product->productName, E_USER_WARNING);

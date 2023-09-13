@@ -13,8 +13,8 @@ $price = $result->price;
 <?php include 'view/components/header.php'; ?>
 <main role="main" class="container">
     <div class="row">
-        <div class="col pt-5">
-            <h1 class="pt-5">Edit Product</h1>
+        <div class="col">
+            <h1>Edit Product</h1>
             <form action="<?php echo "/konsulent-huset/products/edit/" . $id ?>" method="POST">
                 <?php set_csrf() ?>
                 <div class="form-group">

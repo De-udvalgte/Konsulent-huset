@@ -1,13 +1,33 @@
-<?php
+<?php include 'view/components/header.php';
+
 $result = file_get_contents('http://localhost/konsulent-huset/api/products');
+
+if (isset($_SESSION['error_message'])) {
+    $error_message = $_SESSION['error_message'];
+    unset($_SESSION['error_message']);
+}
+
+if (isset($_SESSION['success_message'])) {
+    $success_message = $_SESSION['success_message'];
+    unset($_SESSION['success_message']);
+}
 
 ?>
 
-<?php include 'view/components/header.php'; ?>
 <main role="main" class="container">
     <div class="row">
         <div class="col">
             <h1>Products</h1>
+
+            <?php if (isset($success_message)) { ?>
+                <div class="alert alert-success" role="alert">
+                    <?php out($success_message) ?>
+                </div>
+            <?php } else if (isset($error_message)) { ?>
+                    <div class="alert alert-danger" role="alert">
+                    <?php out($error_message) ?>
+                    </div>
+            <?php } ?>
 
             <table class="table">
 

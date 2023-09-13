@@ -43,6 +43,18 @@ class Order
         return $stmt;
     }
 
+    function getByOrderId($orderId)
+    {
+        $query = "SELECT * FROM orders WHERE orderId=" . $orderId;
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->execute();
+
+        return $stmt;
+    }
+
     function getProdNameByOrderId($orderId)
     {
         $query = "SELECT p.productName FROM orders o INNER JOIN products p ON o.productId = p.productId WHERE o.orderId=" . $orderId;
@@ -55,6 +67,17 @@ class Order
         return $stmt->fetchColumn();
     }
 
+    function ownsOrder($orderId, $userId)
+    {
+        $query = "SELECT * FROM orders WHERE orderId=" . $orderId . " AND userId =" . $userId;
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0;
+    }
 
     function create(){
 
@@ -108,12 +131,13 @@ class Order
     function edit($orderId, $editedOrder){
 
         $query = "UPDATE " . $this->table_name . "
-            SET
-                productId = CASE WHEN `productId`='' or `productId` IS NULL THEN ':productId' END,
-                startDate = CASE WHEN `startDate`='' or `startDate` IS NULL THEN ':startDate ' END,
-                endDate = CASE WHEN `endDate`='' or `endDate` IS NULL THEN ':endDate ' END,
-                address = CASE WHEN `address`='' or `address` IS NULL THEN ':address ' END" .
-        " WHERE orderId=" . $this->orderId;
+                SET
+                    productId = :productId,
+                    startDate = :startDate,
+                    endDate = :endDate,
+                    address = :address
+                WHERE
+                    orderId = :orderId";
 
         // prepare the query
         $stmt = $this->conn->prepare($query);
@@ -129,6 +153,7 @@ class Order
         $stmt->bindParam(':startDate', $this->startDate);
         $stmt->bindParam(':endDate', $this->endDate);
         $stmt->bindParam(':address', $this->address);
+        $stmt->bindParam(':orderId', $orderId);
 
         // execute the query, also check if query was successful
         if($stmt->execute()){

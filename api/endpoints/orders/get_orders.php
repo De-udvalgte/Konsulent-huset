@@ -10,19 +10,34 @@ session_start();
 $database = new Database();
 $db = $database->getConnection();
 
-$order = "";
+$order = new Order($db);
 $stmt = "";
+$authorized = false;
 
-// Authorize and figure out whether its "find all" or "find by ID"
-if (isset($userId) && ($_SESSION['userId'] == $userId || $_SESSION['rolesId'] == 2)) {
-    $order = new Order($db);
-    $stmt = $order->getById($userId);
+// Authorize and figure out whether its "get all", "get by userId" or "get by orderId"
+if (isset($userId)) {
+    // Get by userId
+    if ($_SESSION['userId'] == $userId || $_SESSION['rolesId'] == 2) {
+        $stmt = $order->getById($userId);
+        $authorized = true;
+    }
 
-} else if (!isset($userId) && $_SESSION['rolesId'] == 2) {
-    $order = new Order($db);
-    $stmt = $order->getAll();
+} else if (isset($orderId) && isset($_SESSION['userId'])) {
+    // Get by orderId
+    if ($order->ownsOrder($orderId, $_SESSION['userId']) || $_SESSION['rolesId'] == 2) {
+        $stmt = $order->getByOrderId($orderId);
+        $authorized = true;
+    }
 
 } else {
+    // Get all
+    if ($_SESSION['rolesId'] == 2) {
+        $stmt = $order->getAll();
+        $authorized = true;
+    }
+}
+
+if (!$authorized) {
     http_response_code(401);
 
     echo json_encode(
@@ -30,44 +45,53 @@ if (isset($userId) && ($_SESSION['userId'] == $userId || $_SESSION['rolesId'] ==
     );
 
     die();
-}
+} else {
 
-// Continue request if authorized
-if ($stmt->rowCount() > 0) {
+    // Continue request if authorized
+    if ($stmt->rowCount() > 0) {
 
-    $orders_arr = array();
+        $orders_arr = "";
 
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        extract($row);
+        if ($stmt->rowCount() > 1){
+            $orders_arr = array();
 
-        $productName = $order->getProdNameByOrderId($orderId);
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                extract($row);
 
-        $order_item = array(
-            "orderId" => $orderId,
-            "orderNumber" => $orderNumber,
-            "productId" => $productId,
-            "userId" => $userId,
-            "orderDate" => $orderDate,
-            "startDate" => $startDate,
-            "endDate" => $endDate,
-            "address" => $address,
-            "productName" => $productName
+                $productName = $order->getProdNameByOrderId($orderId);
+
+                $order_item = array(
+                    "orderId" => $orderId,
+                    "orderNumber" => $orderNumber,
+                    "productId" => $productId,
+                    "userId" => $userId,
+                    "orderDate" => $orderDate,
+                    "startDate" => $startDate,
+                    "endDate" => $endDate,
+                    "address" => $address,
+                    "productName" => $productName
+                );
+
+                array_push($orders_arr, $order_item);
+            }
+        } else {
+            $orders_arr = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+
+        // set response code - 200 OK
+        http_response_code(200);
+
+        // show orders data in json format
+        echo json_encode($orders_arr);
+    } else {
+        // set response code - 404 Not found
+        http_response_code(404);
+
+        // tell the user no orders found
+        echo json_encode(
+            array("message" => "No orders found.")
         );
-
-        array_push($orders_arr, $order_item);
     }
 
-    // set response code - 200 OK
-    http_response_code(200);
-
-    // show orders data in json format
-    echo json_encode($orders_arr);
-} else {
-    // set response code - 404 Not found
-    http_response_code(404);
-
-    // tell the user no orders found
-    echo json_encode(
-        array("message" => "No orders found.")
-    );
 }

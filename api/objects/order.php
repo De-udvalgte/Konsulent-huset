@@ -56,7 +56,8 @@ class Order
     }
 
 
-    function create(){
+    function create()
+    {
 
         $query = "INSERT INTO " . $this->table_name . "
             SET
@@ -86,26 +87,42 @@ class Order
         $stmt->bindParam(':address', $this->address);
 
         // execute the query, also check if query was successful
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             return true;
         }
         return false;
     }
 
-    function delete($orderId){
+    function delete($orderId)
+    {
 
         $query = "DELETE FROM " . $this->table_name . " WHERE orderId=" . $orderId;
         // prepare the query
         $stmt = $this->conn->prepare($query);
 
         // execute the query, also check if query was successful
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             return true;
         }
         return false;
     }
 
-    function edit($orderId, $editedOrder){
+    function deleteByUserId($userId)
+    {
+
+        $query = "DELETE FROM " . $this->table_name . " WHERE userId=" . $userId;
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        // execute the query, also check if query was successful
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    function edit($orderId, $editedOrder)
+    {
 
         $query = "UPDATE " . $this->table_name . "
             SET
@@ -113,7 +130,7 @@ class Order
                 startDate = CASE WHEN `startDate`='' or `startDate` IS NULL THEN ':startDate ' END,
                 endDate = CASE WHEN `endDate`='' or `endDate` IS NULL THEN ':endDate ' END,
                 address = CASE WHEN `address`='' or `address` IS NULL THEN ':address ' END" .
-        " WHERE orderId=" . $this->orderId;
+            " WHERE orderId=" . $this->orderId;
 
         // prepare the query
         $stmt = $this->conn->prepare($query);
@@ -131,10 +148,9 @@ class Order
         $stmt->bindParam(':address', $this->address);
 
         // execute the query, also check if query was successful
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             return true;
         }
         return false;
     }
-
 }

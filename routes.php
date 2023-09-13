@@ -35,6 +35,7 @@ get('/konsulent-huset/register_page', 'view/register_page.php');
 post('/konsulent-huset/register_user', 'api/endpoints/auth/register.php');
 post('/konsulent-huset/login_user', 'api/endpoints/auth/login.php');
 get('/konsulent-huset/logout', 'api/endpoints/auth/logout.php');
+POST('/konsulent-huset/api/verify_password', 'api/endpoints/auth/verify_password.php');
 
 // Users / Profile
 // views:

@@ -1,6 +1,7 @@
 <?php $result = file_get_contents('http://localhost/konsulent-huset/api/users'); ?>
 
 <?php include 'view/components/header.php'; ?>
+<?php require 'view/components/auth_modal.php'; ?>
 <main role="main" class="container">
     <div class="row">
         <div class="col">
@@ -23,9 +24,9 @@
                     <th>Last modified</th>
                     <th></th>
                 </tr>
-
+                <?php $x = 0; ?>
                 <?php foreach (json_decode($result, true) as $user) { ?>
-
+                    <?php $x++ ?>
                     <tr>
                         <td>
                             <?php out($user["userId"]) ?>
@@ -51,6 +52,9 @@
                         <td>
                             <a class="me-1 btn btn-primary" href="<?php out("/konsulent-huset/users/edit/" . $user['userId']) ?>"><i class="bi bi-pencil"></i></a>
                             <a class="btn btn-danger" href="<?php out("/konsulent-huset/api/users/delete/" . $user['userId']) ?>"><i class="bi bi-trash3"></i></a>
+
+
+                            <?php insertAuthModal($x, "Confirm user deletion",  "btn btn-danger", '<i class="bi bi-trash3"></i>', "Delete user", "/konsulent-huset/api/users/delete/" . $user['userId'], "/konsulent-huset/users"); ?>
                         </td>
                     </tr>
                 <?php

@@ -18,7 +18,7 @@ $result = file_get_contents('http://localhost/konsulent-huset/api/products');
                     <th>Description</th>
                     <th>Price / Hour</th>
                     <th>&nbsp;</th>
-                    <?php if ($_SESSION["rolesId"] === 2) { ?>
+                    <?php if ($_SESSION["rolesId"] == 2) { ?>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                     <?php } ?>
@@ -44,7 +44,7 @@ $result = file_get_contents('http://localhost/konsulent-huset/api/products');
                         </td>
 
                         <td><a class="action" href="<?php out("products/page/" . $product['productId']) ?>">View</a></td>
-                        <?php if ($_SESSION["rolesId"] === 2) { ?>
+                        <?php if ($_SESSION["rolesId"] == 2) { ?>
                             <td>
                                 <a class="action" href="<?php out("products/edit/" . $product['productId']) ?>">Edit</a>
                             </td>

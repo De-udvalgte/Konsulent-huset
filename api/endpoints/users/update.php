@@ -6,6 +6,9 @@ if (!is_csrf_valid()) {
     exit();
 }
 
+session_name("konsulent_huset");
+session_start();
+
 require('api/config/database.php');
 require('api/objects/user.php');
 
@@ -42,7 +45,6 @@ if (
 
     // update session variables
     // && redirect to profile page
-    session_start();
     if ($_SESSION["userId"] == $userId) {
         $_SESSION["rolesId"] = $user->rolesId;
         $_SESSION["firstName"] = $user->firstName;
@@ -59,4 +61,11 @@ else {
     http_response_code(400);
     // display message: unable to update user
     echo json_encode(array("message" => "Unable to update user.", $user->email));
+
+    // log update user failed
+    if($_SESSION["userId"] == $userId) {
+        trigger_error("ID: " . $_SESSION['userId'] . " was unable to update account", E_USER_WARNING);
+    } else {
+        trigger_error("ID: " . $_SESSION['userId'] . " was unable to update user with id: " . $userId, E_USER_WARNING);
+    }
 }

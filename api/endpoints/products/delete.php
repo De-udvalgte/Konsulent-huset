@@ -3,6 +3,9 @@
 require('api/config/database.php');
 require('api/objects/product.php');
 
+session_name("konsulent_huset");
+session_start();
+
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
@@ -24,7 +27,12 @@ if ($product->delete()) {
 } else {
         // set response code - 503 service unavailable
         http_response_code(503);
-
+        
         // tell the user
         echo json_encode(array("message" => "Unable to delete product."));
+
+        // log delete product failed
+        trigger_error("ID: " . $_SESSION['userId'] . " was unable to delete product with id: " . $id, E_USER_WARNING);
+        
+        header("Location: /konsulent-huset/products");
 }

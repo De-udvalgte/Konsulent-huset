@@ -18,10 +18,14 @@ if ($order->delete($orderId)){
 
     echo json_encode(array("message" => "Product was deleted."));
 }
-// message if unable to create product
+// message if unable to delete order
 else{
     // set response code
     http_response_code(400);
-    // display message: unable to create product
+    // display message: unable to delete order
     echo json_encode(array("message" => "Unable to delete product."));
+
+    // log delete order failed
+    trigger_error( $_SESSION['userId'] . " was unable to delete order with id: " . $orderId, E_USER_WARNING);
+
 }

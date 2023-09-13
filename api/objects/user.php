@@ -50,10 +50,14 @@ class User
         $stmt->bindParam(':password', $password_hash);
 
         // execute the query, also check if query was successful
-        if ($stmt->execute()) {
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
-        return false;
     }
 
     function getAll()
@@ -63,9 +67,13 @@ class User
         // prepare the query
         $stmt = $this->conn->prepare($query);
 
-        $stmt->execute();
-
-        return $stmt;
+        try {
+            // execute the query
+            $stmt->execute();
+            return $stmt;
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
+        }
     }
 
     function getById()
@@ -88,10 +96,15 @@ class User
         $stmt->bindParam(1, $this->userId);
 
         // execute the query
-        $stmt->execute();
+        try {
+            $stmt->execute();
 
-        // get retrieved row
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            // get retrieved row
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
+        }
 
         // set values to object properties
         $this->firstName = $row['firstName'];
@@ -106,6 +119,7 @@ class User
     {
         $query = "UPDATE " . $this->table_name . "
         SET
+            rolesId = :rolesId,
             firstName = :firstName,
             lastName = :lastName,
             email = :email
@@ -116,21 +130,27 @@ class User
 
         //sanitize
         //$this->userId = htmlspecialchars(strip_tags($this->userId));
+        $this->rolesId = htmlspecialchars(strip_tags($this->rolesId));
         $this->firstName = htmlspecialchars(strip_tags($this->firstName));
         $this->lastName = htmlspecialchars(strip_tags($this->lastName));
         $this->email = htmlspecialchars(strip_tags($this->email));
 
         // bind the values
         $stmt->bindParam(':userId', $this->userId);
+        $stmt->bindParam(':rolesId', $this->rolesId);
         $stmt->bindParam(':firstName', $this->firstName);
         $stmt->bindParam(':lastName', $this->lastName);
         $stmt->bindParam(':email', $this->email);
 
         // execute the query, also check if query was successful
-        if ($stmt->execute()) {
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
-        return false;
     }
 
     // check if given email exist in the database
@@ -152,36 +172,40 @@ class User
         $stmt->bindParam(1, $this->email);
 
         // execute the query
-        $stmt->execute();
+        try {
+            $stmt->execute();
 
-        // get number of rows
-        $num = $stmt->rowCount();
+            // get number of rows
+            $num = $stmt->rowCount();
 
-        // if email exists, assign values to object properties for easy access and use for php sessions
-        if ($num > 0) {
+            // if email exists, assign values to object properties for easy access and use for php sessions
+            if ($num > 0) {
 
-            // get record details / values
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            // assign values to object properties
-            $this->userId = $row['userId'];
-            $this->firstName = $row['firstName'];
-            $this->lastName = $row['lastName'];
-            $this->email = $row['email'];
-            $this->password = $row['password'];
-            $this->rolesId = $row['rolesId'];
+                // get record details / values
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                // assign values to object properties
+                $this->userId = $row['userId'];
+                $this->firstName = $row['firstName'];
+                $this->lastName = $row['lastName'];
+                $this->email = $row['email'];
+                $this->password = $row['password'];
+                $this->rolesId = $row['rolesId'];
 
-            session_name("konsulent_huset");
-            session_start();
-            $_SESSION["userId"] = $this->userId;
-            $_SESSION["firstName"] = $this->firstName;
-            $_SESSION["lastName"] = $this->lastName;
-            $_SESSION["email"] = $this->email;
-            $_SESSION["rolesId"] = $this->rolesId;
-            // return true because email exists in the database
-            return true;
+                /* session_name("konsulent_huset");
+                session_start();
+                $_SESSION["userId"] = $this->userId;
+                $_SESSION["firstName"] = $this->firstName;
+                $_SESSION["lastName"] = $this->lastName;
+                $_SESSION["email"] = $this->email;
+                $_SESSION["rolesId"] = $this->rolesId; */
+                // return true because email exists in the database
+                return true;
+            }
+
+            // return false if email does not exist in the database
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
-
-        // return false if email does not exist in the database
         return false;
     }
 
@@ -200,10 +224,13 @@ class User
         $stmt->bindParam(1, $this->userId);
 
         // execute query
-        if ($stmt->execute()) {
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
-
-        return false;
     }
 }

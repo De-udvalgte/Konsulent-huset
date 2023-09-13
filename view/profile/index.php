@@ -33,7 +33,7 @@ $rolesId = $result->rolesId;
                         <?php out($userId) ?>
                     </td>
                     <td>
-                        <?php out($rolesId === 1 ? "User" : "Admin") ?>
+                        <?php out($rolesId ==  1 ? "User" : "Admin") ?>
                     </td>
                     <td>
                         <?php out($firstName) ?>

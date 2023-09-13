@@ -92,6 +92,8 @@ if (!$authorized) {
         echo json_encode(
             array("message" => "No orders found.")
         );
-    }
 
+        // log no orders found
+        trigger_error("ID: " . $_SESSION['userId'] . " was unable to find any orders.", E_USER_WARNING);
+    }
 }

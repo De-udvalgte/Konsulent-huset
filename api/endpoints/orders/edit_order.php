@@ -35,12 +35,15 @@ if (
 
     header("Location: /konsulent-huset/orders");
 
-    echo json_encode(array("message" => "Product was edited."));
+    echo json_encode(array("message" => "Order was edited."));
 }
-// message if unable to create product
+// message if unable to edit order
 else{
     // set response code
     http_response_code(400);
-    // display message: unable to create product
-    echo json_encode(array("message" => "Unable to edit product."));
+    // display message: unable to edit order
+    echo json_encode(array("message" => "Unable to edit order."));
+
+    // log edit order failed
+    trigger_error( $_SESSION['userId'] . " was unable to edit order with id: " . $orderId, E_USER_WARNING);
 }

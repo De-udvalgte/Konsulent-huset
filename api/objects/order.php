@@ -26,8 +26,11 @@ class Order
         // prepare the query
         $stmt = $this->conn->prepare($query);
 
-        $stmt->execute();
-
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
+        }
         return $stmt;
     }
 
@@ -38,7 +41,11 @@ class Order
         // prepare the query
         $stmt = $this->conn->prepare($query);
 
-        $stmt->execute();
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
+        }
 
         return $stmt;
     }
@@ -62,7 +69,12 @@ class Order
         // prepare the query
         $stmt = $this->conn->prepare($query);
 
-        $stmt->execute();
+        // execute the query
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
+        }
 
         return $stmt->fetchColumn();
     }
@@ -79,7 +91,8 @@ class Order
         return $stmt->rowCount() > 0;
     }
 
-    function create(){
+    function create()
+    {
 
         $query = "INSERT INTO " . $this->table_name . "
             SET
@@ -108,27 +121,39 @@ class Order
         $stmt->bindParam(':endDate', $this->endDate);
         $stmt->bindParam(':address', $this->address);
 
+
+
         // execute the query, also check if query was successful
-        if($stmt->execute()){
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
-        return false;
     }
 
-    function delete($orderId){
+    function delete($orderId)
+    {
 
         $query = "DELETE FROM " . $this->table_name . " WHERE orderId=" . $orderId;
         // prepare the query
         $stmt = $this->conn->prepare($query);
 
         // execute the query, also check if query was successful
-        if($stmt->execute()){
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
-        return false;
     }
 
-    function edit($orderId, $editedOrder){
+    function edit($orderId, $editedOrder)
+    {
 
         $query = "UPDATE " . $this->table_name . "
                 SET
@@ -156,10 +181,14 @@ class Order
         $stmt->bindParam(':orderId', $orderId);
 
         // execute the query, also check if query was successful
-        if($stmt->execute()){
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
-        return false;
     }
 
 }

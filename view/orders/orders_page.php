@@ -112,13 +112,15 @@ if ($_SESSION['rolesId'] == 1) {
                             </td>
                             <td>
                                 <button type="button" class="btn btn-danger btn-sm"
-                                        name="delete-order" <?php echo "data-item-id='" . htmlspecialchars($order["orderId"]) . "'" ?>>
+                                        name="delete-order" <?php out( "data-item-id='" . $order["orderId"]) . "'" ?>>
                                     Delete
-                                </button>
-                                <button type="button" class="btn btn-warning btn-sm"
-                                        name="edit-order" <?php echo "data-item-id='" . htmlspecialchars($order["orderId"]) . "'" ?>>
-                                    Edit
-                                </button>
+
+                                    <a href="edit_order_page/<?php out($order["orderId"])?>">
+                                        <button type="button" class="btn btn-warning btn-sm"
+                                                name="edit-order">
+                                            Edit
+                                        </button>
+                                    </a>
                             </td>
                         </tr>
                         <?php

@@ -3,6 +3,9 @@
 require('api/config/database.php');
 require('api/objects/product.php');
 
+session_name("konsulent_huset");
+session_start();
+
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
@@ -39,4 +42,7 @@ if ($product != null) {
     echo json_encode(
         array("message" => "No products found.")
     );
+
+    // log no products found
+    trigger_error("ID: " . $_SESSION['userId'] . " was unable to find product by Id: " . $id, E_USER_WARNING);
 }

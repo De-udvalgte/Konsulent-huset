@@ -3,6 +3,9 @@
 require('api/config/database.php');
 require('api/objects/user.php');
 
+session_name("konsulent_huset");
+session_start();
+
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
@@ -36,8 +39,15 @@ if ($user != null) {
     // set response code - 404 Not found
     http_response_code(404);
 
-    // tell the user no products found
+    // tell the user wasnt found
     echo json_encode(
         array("message" => "No users found.")
     );
+
+    // log no users found
+    if($_SESSION['userId'] == $userId) {
+        trigger_error("ID: " . $_SESSION['userId'] . " could'nt load own user data", E_USER_NOTICE);
+    } else {
+        trigger_error("ID: " . $_SESSION['userId'] . " was unable to find user by Id: " . $userId, E_USER_WARNING);
+    }
 }

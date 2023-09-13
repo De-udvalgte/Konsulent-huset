@@ -22,7 +22,11 @@ class Product
         // prepare the query
         $stmt = $this->conn->prepare($query);
 
-        $stmt->execute();
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
+        }
 
         return $stmt;
     }
@@ -47,7 +51,11 @@ class Product
         $stmt->bindParam(1, $this->productId);
 
         // execute query
-        $stmt->execute();
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
+        }
 
         // get retrieved row
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -62,7 +70,6 @@ class Product
 
     function create()
     {
-
         $query = "INSERT INTO " . $this->table_name . "
             SET
                 productName = :productName,
@@ -85,15 +92,18 @@ class Product
         $stmt->bindParam(':price', $this->price);
 
         // execute the query, also check if query was successful
-        if ($stmt->execute()) {
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
-        return false;
     }
 
     function update()
     {
-
         // update query
         $query = "UPDATE " . $this->table_name . "
                 SET
@@ -122,17 +132,19 @@ class Product
         $stmt->bindParam(':productId', $this->productId);
 
         // execute the query
-        if ($stmt->execute()) {
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
-
-        return false;
 
     }
 
     function delete()
     {
-
         // delete query
         $query = "DELETE FROM " . $this->table_name . " WHERE productId = ?";
         print_r($query);
@@ -146,11 +158,13 @@ class Product
         $stmt->bindParam(1, $this->productId);
 
         // execute query
-        if ($stmt->execute()) {
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
-
-        return false;
     }
-
 }

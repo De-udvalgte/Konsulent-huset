@@ -9,6 +9,9 @@ if (!is_csrf_valid()) {
 require('api/config/database.php');
 require('api/objects/product.php');
 
+session_name("konsulent_huset");
+session_start();
+
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
@@ -46,4 +49,7 @@ else {
     http_response_code(400);
     // display message: unable to create product
     echo json_encode(array("message" => "Unable to create product."));
+
+    // log create product failed
+    trigger_error("ID: " . $_SESSION['userId'] . " was unable to create product with name: " . $product->productName, E_USER_WARNING);
 }

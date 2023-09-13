@@ -24,8 +24,9 @@ if ($email_exists && password_verify($_POST["password"], $user->password)) {
     //set response code
     http_response_code(200);
 
-    session_name("konsulent_huset");
-    session_start();
+    //session_name("konsulent_huset");
+    //session_start();
+    
     $_SESSION["userId"] = $user->userId;
     $_SESSION["firstName"] = $user->firstName;
     $_SESSION["lastName"] = $user->lastName;
@@ -44,4 +45,7 @@ else {
 
     // tell the user login failed
     echo json_encode(array("message" => "Login failed."));
+
+    // log login failed
+    trigger_error("Login failed for user with email: " . $_POST["email"], E_USER_WARNING);
 }

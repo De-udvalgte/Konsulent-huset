@@ -4,6 +4,9 @@ require('api/config/database.php');
 require('api/objects/user.php');
 require('api/objects/order.php');
 
+session_name("konsulent_huset");
+session_start();
+
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
@@ -13,7 +16,7 @@ $user = new User($db);
 $order = new Order($db);
 
 // set user property values
-$user->userId = $userId;  // gets id from router 
+$user->userId = $userId; // gets id from router 
 
 // delete the user
 if ($order->deleteByUserId($user->userId) && $user->delete()) {
@@ -21,7 +24,6 @@ if ($order->deleteByUserId($user->userId) && $user->delete()) {
     http_response_code(200);
 
     // tell the user
-    session_start();
     if ($_SESSION["userId"] == $userId) {
         header("Location: /konsulent-huset/logout");
     } else {
@@ -34,4 +36,11 @@ if ($order->deleteByUserId($user->userId) && $user->delete()) {
 
     // tell the user
     echo json_encode(array("message" => "Unable to delete user."));
+
+    // log delete user failed
+    if ($_SESSION["userId"] == $userId) {
+        trigger_error("ID: " . $_SESSION['userId'] . " was unable to delete account", E_USER_WARNING);
+    } else {
+        trigger_error("ID: " . $_SESSION['userId'] . " was unable to delete user with id: " . $userId, E_USER_WARNING);
+    }
 }

@@ -38,7 +38,7 @@ if (!isset($_SESSION["userId"])) {
                         <a class="nav-item nav-link" href="/konsulent-huset/register_page">Sign Up</a>
                     <?php } else { ?>
                         <a class="nav-item nav-link" href="/konsulent-huset/orders">Orders</a>
-                        <?php if ($_SESSION["rolesId"] === 2) { ?>
+                        <?php if ($_SESSION["rolesId"] == 2) { ?>
                             <a class="nav-item nav-link" href="/konsulent-huset/products/create">Create Product</a>
                             <a class="nav-item nav-link" href="/konsulent-huset/users">Users</a>
                         <?php } ?>

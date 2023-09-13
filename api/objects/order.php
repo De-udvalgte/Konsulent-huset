@@ -26,14 +26,33 @@ class Order
         // prepare the query
         $stmt = $this->conn->prepare($query);
 
-        $stmt->execute();
-
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
+        }
         return $stmt;
     }
 
     function getById($id)
     {
         $query = "SELECT * FROM orders WHERE userId=" . $id;
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
+        }
+
+        return $stmt;
+    }
+
+    function getByOrderId($orderId)
+    {
+        $query = "SELECT * FROM orders WHERE orderId=" . $orderId;
 
         // prepare the query
         $stmt = $this->conn->prepare($query);
@@ -50,11 +69,27 @@ class Order
         // prepare the query
         $stmt = $this->conn->prepare($query);
 
-        $stmt->execute();
+        // execute the query
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
+        }
 
         return $stmt->fetchColumn();
     }
 
+    function ownsOrder($orderId, $userId)
+    {
+        $query = "SELECT * FROM orders WHERE orderId=" . $orderId . " AND userId =" . $userId;
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0;
+    }
 
     function create()
     {
@@ -86,11 +121,17 @@ class Order
         $stmt->bindParam(':endDate', $this->endDate);
         $stmt->bindParam(':address', $this->address);
 
+
+
         // execute the query, also check if query was successful
-        if ($stmt->execute()) {
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
-        return false;
     }
 
     function delete($orderId)
@@ -101,10 +142,14 @@ class Order
         $stmt = $this->conn->prepare($query);
 
         // execute the query, also check if query was successful
-        if ($stmt->execute()) {
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
-        return false;
     }
 
     function deleteByUserId($userId)
@@ -125,12 +170,13 @@ class Order
     {
 
         $query = "UPDATE " . $this->table_name . "
-            SET
-                productId = CASE WHEN `productId`='' or `productId` IS NULL THEN ':productId' END,
-                startDate = CASE WHEN `startDate`='' or `startDate` IS NULL THEN ':startDate ' END,
-                endDate = CASE WHEN `endDate`='' or `endDate` IS NULL THEN ':endDate ' END,
-                address = CASE WHEN `address`='' or `address` IS NULL THEN ':address ' END" .
-            " WHERE orderId=" . $this->orderId;
+                SET
+                    productId = :productId,
+                    startDate = :startDate,
+                    endDate = :endDate,
+                    address = :address
+                WHERE
+                    orderId = :orderId";
 
         // prepare the query
         $stmt = $this->conn->prepare($query);
@@ -146,11 +192,16 @@ class Order
         $stmt->bindParam(':startDate', $this->startDate);
         $stmt->bindParam(':endDate', $this->endDate);
         $stmt->bindParam(':address', $this->address);
+        $stmt->bindParam(':orderId', $orderId);
 
         // execute the query, also check if query was successful
-        if ($stmt->execute()) {
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
-        return false;
     }
 }

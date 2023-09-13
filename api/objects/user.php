@@ -170,13 +170,13 @@ class User
             $this->password = $row['password'];
             $this->rolesId = $row['rolesId'];
 
-            session_name("konsulent_huset");
+            /* session_name("konsulent_huset");
             session_start();
             $_SESSION["userId"] = $this->userId;
             $_SESSION["firstName"] = $this->firstName;
             $_SESSION["lastName"] = $this->lastName;
             $_SESSION["email"] = $this->email;
-            $_SESSION["rolesId"] = $this->rolesId;
+            $_SESSION["rolesId"] = $this->rolesId; */
             // return true because email exists in the database
             return true;
         }

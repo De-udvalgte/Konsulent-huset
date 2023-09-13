@@ -51,6 +51,6 @@ if ($stmt->rowCount() > 0) {
     );
 
     // log no products found
-    trigger_error("ID: " . $_SESSION['userId'] . " was unable to find any products", E_USER_WARNING);
+    trigger_error("User was unable to find any products", E_USER_WARNING);
 }
 

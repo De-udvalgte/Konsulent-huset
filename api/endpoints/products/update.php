@@ -27,7 +27,7 @@ $product->productId = $id;
 $product->productName = filter_input(INPUT_POST, 'productName', FILTER_SANITIZE_STRING);
 $product->productDesc = filter_input(INPUT_POST, 'productDesc', FILTER_SANITIZE_STRING);
 $product->productTitle = filter_input(INPUT_POST, 'productTitle', FILTER_SANITIZE_STRING);
-$product->price = filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_INT);
+$product->price = filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
 // update the product
 if (

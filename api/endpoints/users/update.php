@@ -5,7 +5,7 @@ session_start();
 
 if (!is_csrf_valid()) {
     // The form is forged
-    // Code here
+    trigger_error("CSRF token not valid on updating User Id: " . $id , E_USER_WARNING);
     exit();
 }
 

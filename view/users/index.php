@@ -31,7 +31,7 @@
                             <?php out($user["userId"]) ?>
                         </td>
                         <td>
-                            <?php out($user["rolesId"] === 1 ? "User" : "Admin") ?>
+                            <?php out($user["rolesId"] == 1 ? "User" : "Admin") ?>
                         </td>
                         <td>
                             <?php out($user["firstName"]) ?>

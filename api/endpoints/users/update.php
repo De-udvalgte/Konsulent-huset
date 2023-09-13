@@ -18,12 +18,14 @@ $user = new User($db);
 
 // set product property values
 $user->userId = $userId;
+$user->rolesId = filter_input(INPUT_POST, 'rolesId', FILTER_SANITIZE_NUMBER_INT);
 $user->firstName = filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_STRING);
 $user->lastName = filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_STRING);
 $user->email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
 if (
     !empty($user->userId) &&
+    !empty($user->rolesId) &&
     !empty($user->firstName) &&
     !empty($user->lastName) &&
     !empty($user->email) &&
@@ -42,6 +44,7 @@ if (
     // && redirect to profile page
     session_start();
     if ($_SESSION["userId"] == $userId) {
+        $_SESSION["rolesId"] = $user->rolesId;
         $_SESSION["firstName"] = $user->firstName;
         $_SESSION["lastName"] = $user->lastName;
         $_SESSION["email"] = $user->email;

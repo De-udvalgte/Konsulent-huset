@@ -106,6 +106,7 @@ class User
     {
         $query = "UPDATE " . $this->table_name . "
         SET
+            rolesId = :rolesId,
             firstName = :firstName,
             lastName = :lastName,
             email = :email
@@ -116,12 +117,14 @@ class User
 
         //sanitize
         //$this->userId = htmlspecialchars(strip_tags($this->userId));
+        $this->rolesId = htmlspecialchars(strip_tags($this->rolesId));
         $this->firstName = htmlspecialchars(strip_tags($this->firstName));
         $this->lastName = htmlspecialchars(strip_tags($this->lastName));
         $this->email = htmlspecialchars(strip_tags($this->email));
 
         // bind the values
         $stmt->bindParam(':userId', $this->userId);
+        $stmt->bindParam(':rolesId', $this->rolesId);
         $stmt->bindParam(':firstName', $this->firstName);
         $stmt->bindParam(':lastName', $this->lastName);
         $stmt->bindParam(':email', $this->email);

@@ -17,7 +17,7 @@ $rolesId = $result->rolesId;
             <h1>Profile</h1>
 
             <a class="btn btn-primary mt-3" href="/konsulent-huset/profile/edit">Edit</a>
-            <?php insertAuthModal($x, "Confirm profile deletion",  "btn btn-danger", 'Delete', "Delete profile", "/konsulent-huset/api/users/delete/" . $userId, "/konsulent-huset/profile"); ?>
+            <?php insertAuthModal(1, "Confirm profile deletion",  "btn btn-danger", 'Delete', "Delete profile", "/konsulent-huset/api/users/delete/" . $userId, "/konsulent-huset/profile"); ?>
 
             <table class="table">
 

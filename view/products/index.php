@@ -4,6 +4,7 @@ $result = file_get_contents('http://localhost/konsulent-huset/api/products');
 ?>
 
 <?php include 'view/components/header.php'; ?>
+<?php require 'view/components/auth_modal.php'; ?>
 <main role="main" class="container">
     <div class="row">
         <div class="col">
@@ -23,9 +24,9 @@ $result = file_get_contents('http://localhost/konsulent-huset/api/products');
                         <th>&nbsp;</th>
                     <?php } ?>
                 </tr>
-
+                <?php $x = 0; ?>
                 <?php foreach (json_decode($result, true) as $product) { ?>
-
+                    <?php $x++ ?>
                     <tr>
                         <td>
                             <?php out($product["productId"]) ?>
@@ -49,13 +50,12 @@ $result = file_get_contents('http://localhost/konsulent-huset/api/products');
                                 <a class="action" href="<?php out("products/edit/" . $product['productId']) ?>">Edit</a>
                             </td>
                             <td>
-                                <a class="action" href="<?php out("products/delete/" . $product['productId']) ?>">Delete</a>
+                                <?php insertAuthModal($x, "Confirm product deletion",  "btn btn-danger", '<i class="bi bi-trash3"></i>', "Delete product", "/konsulent-huset/products/delete/" . $product['productId'], "/konsulent-huset/products"); ?>
                             </td>
                         <?php } ?>
                     </tr>
-                    <?php
-                }
-                ;
+                <?php
+                };
                 ?>
             </table>
         </div>

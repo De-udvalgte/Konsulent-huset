@@ -4,7 +4,7 @@ session_start();
 if (!isset($_SESSION["userId"])) {
     $_SESSION["rolesId"] = 1;
 }
-print_r($_SESSION["rolesId"])
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

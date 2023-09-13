@@ -40,20 +40,23 @@ if (
 
     session_start();
     if (
-        !empty($_SESSION["rolesId"]) && $_SESSION["rolesId"] === 2
+        !empty($_SESSION["rolesId"]) && $_SESSION["rolesId"] == 2
     ) {
         header("Location: users"); // redirects back to admins users page after registered a new user
     } else {
         header("Location: login");
     }
     ;
-    // display message: product was created
+    // display message: user was created
     echo json_encode(array("message" => "User was created."));
 }
-// message if unable to create product
+// message if unable to create user
 else {
     // set response code
     http_response_code(400);
-    // display message: unable to create product
+    // display message: unable to create user
     echo json_encode(array("message" => "Unable to create user.", $user->email));
+
+    // log register failed
+    trigger_error("Register user failed for email: " . $_POST["email"], E_USER_WARNING);
 }

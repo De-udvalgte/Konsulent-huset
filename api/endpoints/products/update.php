@@ -52,5 +52,8 @@ else {
 
     // tell the user
     echo json_encode(array("message" => "Unable to update product."));
+
+    // log update product failed
+    trigger_error("ID: " . $_SESSION['userId'] . " was unable to update product with id: " . $id, E_USER_WARNING);
 }
 ?>

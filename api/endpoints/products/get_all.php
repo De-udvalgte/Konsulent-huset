@@ -46,5 +46,8 @@ if ($stmt->rowCount() > 0) {
     echo json_encode(
         array("message" => "No products found.")
     );
+
+    // log no products found
+    trigger_error("ID: " . $_SESSION['userId'] . " was unable to find any products", E_USER_WARNING);
 }
 

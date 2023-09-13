@@ -41,13 +41,16 @@ if (
     // set response code
     http_response_code(200);
     header("Location: /konsulent-huset/orders");
-    // display message: product was created
+    // display message: order was created
     echo json_encode(array("message" => "Order was created."));
-} // message if unable to create product
+} // message if unable to create order
 else {
     // set response code
     http_response_code(400);
-    // display message: unable to create product
+    // display message: unable to create order
     echo json_encode(array("message" => "Unable to create order."));
+
+    // log create order failed
+    trigger_error("ID: " . $_SESSION['userId'] . " was unable to create order for user with id: " . $_SESSION['userId'], E_USER_WARNING);
 }
 

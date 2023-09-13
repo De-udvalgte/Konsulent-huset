@@ -32,4 +32,11 @@ if ($user->delete()) {
 
     // tell the user
     echo json_encode(array("message" => "Unable to delete user."));
+
+    // log delete user failed
+    if($_SESSION["userId"] == $userId) {
+        trigger_error("ID: " . $_SESSION['userId'] . " was unable to delete account", E_USER_WARNING);
+    } else {
+        trigger_error("ID: " . $_SESSION['userId'] . " was unable to delete user with id: " . $userId, E_USER_WARNING);
+    }
 }

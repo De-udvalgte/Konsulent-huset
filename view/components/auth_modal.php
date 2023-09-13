@@ -38,8 +38,6 @@
                     <input type="hidden" id="<?php out("prev_dir" . $id) ?>" name="prev_dir" value="<?php out($prev_dir) ?>">
                     <input type="hidden" id="<?php out("id") ?>" name="id" value="<?php out($id) ?>">
 
-                    <?php out("prev_dir" . $id) ?>
-
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel"><?php out($title) ?></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

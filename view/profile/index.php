@@ -1,4 +1,5 @@
 <?php include 'view/components/header.php'; ?>
+<?php require 'view/components/auth_modal.php'; ?>
 <?php
 $result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/users/' . $_SESSION["userId"]));
 $userId = $result->userId;
@@ -16,7 +17,8 @@ $rolesId = $result->rolesId;
             <h1>Profile</h1>
 
             <a class="btn btn-primary mt-3" href="/konsulent-huset/profile/edit">Edit</a>
-            <a class="btn btn-danger mt-3" href=<?php echo "/konsulent-huset/api/users/delete/" .  $userId ?>>Delete</a>
+            <?php insertAuthModal($x, "Confirm profile deletion",  "btn btn-danger", 'Delete', "Delete profile", "/konsulent-huset/api/users/delete/" . $userId, "/konsulent-huset/profile"); ?>
+
             <table class="table">
 
                 <tr>

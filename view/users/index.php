@@ -51,9 +51,6 @@
                         </td>
                         <td>
                             <a class="me-1 btn btn-primary" href="<?php out("/konsulent-huset/users/edit/" . $user['userId']) ?>"><i class="bi bi-pencil"></i></a>
-                            <a class="btn btn-danger" href="<?php out("/konsulent-huset/api/users/delete/" . $user['userId']) ?>"><i class="bi bi-trash3"></i></a>
-
-
                             <?php insertAuthModal($x, "Confirm user deletion",  "btn btn-danger", '<i class="bi bi-trash3"></i>', "Delete user", "/konsulent-huset/api/users/delete/" . $user['userId'], "/konsulent-huset/users"); ?>
                         </td>
                     </tr>

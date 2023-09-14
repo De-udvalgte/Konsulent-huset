@@ -19,15 +19,15 @@ $db = $database->getConnection();
 $order = new Order($db);
 
 // set product property values
-$order->orderNumber = rand(1000,9999);
+$order->orderNumber = rand(1000, 9999);
 $order->productId = $_POST["productId"];
 $order->startDate = $_POST["startDate"];
 $order->endDate = $_POST["endDate"];
 $order->address = $_POST["address"];
 
-if ($_SESSION['rolesId'] === 1){
+if ($_SESSION['rolesId'] == 1) {
     $order->userId = $_SESSION['userId'];
-} elseif ($_SESSION['rolesId'] === 2){
+} elseif ($_SESSION['rolesId'] == 2) {
     $order->userId = $_POST["userId"];
 }
 
@@ -47,12 +47,11 @@ if (
     // set response code
     http_response_code(200);
     header("Location: /konsulent-huset/orders");
-    
 } // message if unable to create order
 else {
     // set response code
     http_response_code(400);
-    
+
     // set session error message
     $_SESSION['error_message'] = "Something went wrong: Unable to create order";
 
@@ -62,4 +61,3 @@ else {
     // log create order failed
     trigger_error("ID: " . $_SESSION['userId'] . " was unable to create order for user with id: " . $_SESSION['userId'], E_USER_WARNING);
 }
-

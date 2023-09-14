@@ -19,8 +19,8 @@ include 'view/components/header.php';
 ?>
 <main role="main" class="container">
     <div class="row">
-        <div class="col pt-5">
-            <h1 class="pt-5">Edit Product</h1>
+        <div class="col">
+            <h1>Edit Product</h1>
             <form action="<?php echo "/konsulent-huset/products/edit/" . $id ?>" method="POST">
                 <?php set_csrf() ?>
                 <div class="form-group">
@@ -40,12 +40,16 @@ include 'view/components/header.php';
                 </div>
                 <div class="form-group">
                     <label for="price">Price</label>
-                    <input class="form-control" type="number" id="price" name="price" value="<?php out($price) ?>">
+                    <input class="form-control" type="number" step="any" id="price" name="price"
+                        value="<?php out($price) ?>">
                 </div>
 
                 <button class="btn btn-primary mt-3" type="submit">Update</button>
             </form>
         </div>
+    </div>
+    <div class="row mt-5">
+        <a class="link" href="/konsulent-huset/products">Go Back</a>
     </div>
 </main>
 <?php include 'view/components/footer.php'; ?>

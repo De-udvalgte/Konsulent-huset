@@ -33,17 +33,25 @@ if (
     // set response code
     http_response_code(200);
 
+    // set session success message
+    $_SESSION['success_message'] = "Order was edited";
+
+    // redirect to orders page
     header("Location: /konsulent-huset/orders");
 
-    echo json_encode(array("message" => "Order was edited."));
+    
 }
 // message if unable to edit order
 else{
     // set response code
     http_response_code(400);
-    // display message: unable to edit order
-    echo json_encode(array("message" => "Unable to edit order."));
+    
+    // set session error message
+    $_SESSION['error_message'] = "Something went wrong: Unable to edit order";
 
+    // redirect to orders page
+    header("Location: /konsulent-huset/orders");
+    
     // log edit order failed
     trigger_error( $_SESSION['userId'] . " was unable to edit order with id: " . $orderId, E_USER_WARNING);
 }

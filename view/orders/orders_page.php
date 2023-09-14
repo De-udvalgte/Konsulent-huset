@@ -46,12 +46,12 @@ if ($_SESSION['rolesId'] == 1) {
                         <?php out($success_message) ?>
                     </div>
                 <?php } else if (isset($error_message)) { ?>
-                        <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger" role="alert">
                         <?php out($error_message) ?>
-                        </div>
+                    </div>
                 <?php } ?>
 
-  
+
                 <h1 class="text-center">Create order</h1>
                 <form class="mt-3" action="api/order" method="POST">
                     <div class="form-group">
@@ -59,7 +59,7 @@ if ($_SESSION['rolesId'] == 1) {
                         <input class="form-control" type="number" id="productId" name="productId">
                     </div>
                     <br>
-                    <?php if ($_SESSION['rolesId'] === 2) { ?>
+                    <?php if ($_SESSION['rolesId'] == 2) { ?>
                         <div class="form-group">
                             <label for="userId">User ID</label>
                             <input class="form-control" type="number" id="userId" name="userId">
@@ -93,7 +93,7 @@ if ($_SESSION['rolesId'] == 1) {
                 <table class="table mt-4">
 
                     <tr>
-                        <?php if ($_SESSION['rolesId'] === 2) {
+                        <?php if ($_SESSION['rolesId'] == 2) {
                             echo "<th>ID</th>" .
                                 "<th>User ID</th>" .
                                 "<th>Product ID</th>";
@@ -110,7 +110,7 @@ if ($_SESSION['rolesId'] == 1) {
                     <?php foreach (json_decode($result, true) as $order) { ?>
 
                         <tr>
-                            <?php if ($_SESSION['rolesId'] === 2) {
+                            <?php if ($_SESSION['rolesId'] == 2) {
                                 echo "<td>" . htmlspecialchars($order["orderId"]) . "</td>" .
                                     "<td>" . htmlspecialchars($order["userId"]) . "</td>" .
                                     "<td>" . htmlspecialchars($order["productId"]) . "</td>";
@@ -135,12 +135,8 @@ if ($_SESSION['rolesId'] == 1) {
                             </td>
 
                             <td>
-                                <a class="me-1 btn btn-primary"
-                                    href="<?php out("/konsulent-huset/edit_order_page/" . $order['orderId']) ?>"><i
-                                        class="bi bi-pencil"></i></a>
-                                <a class="btn btn-danger"
-                                    href="<?php out("/konsulent-huset/api/order/delete/" . $order['orderId']) ?>"><i
-                                        class="bi bi-trash3"></i></a>
+                                <a class="me-1 btn btn-primary" href="<?php out("/konsulent-huset/edit_order_page/" . $order['orderId']) ?>"><i class="bi bi-pencil"></i></a>
+                                <a class="btn btn-danger" href="<?php out("/konsulent-huset/api/order/delete/" . $order['orderId']) ?>"><i class="bi bi-trash3"></i></a>
                             </td>
                         </tr>
                     <?php } ?>

@@ -53,5 +53,5 @@ if ($stmt->rowCount() > 0) {
     );
 
     // log no users found
-    trigger_error("ID: " . $_SESSION['userId'] . " was unable to find any users", E_USER_WARNING);
+    trigger_error("Admin was unable to find any users", E_USER_WARNING);
 }

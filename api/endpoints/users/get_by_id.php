@@ -44,10 +44,7 @@ if ($user != null) {
         array("message" => "No users found.")
     );
 
-    // log no users found
-    if($_SESSION['userId'] == $userId) {
-        trigger_error("ID: " . $_SESSION['userId'] . " could'nt load own user data", E_USER_NOTICE);
-    } else {
-        trigger_error("ID: " . $_SESSION['userId'] . " was unable to find user by Id: " . $userId, E_USER_WARNING);
-    }
+    // log no user found
+    trigger_error("Was unable to find user by Id: " . $userId, E_USER_WARNING);
+
 }

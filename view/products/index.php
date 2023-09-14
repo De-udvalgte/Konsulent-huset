@@ -1,19 +1,30 @@
 <?php
+include 'view/components/header.php';
+require 'view/components/auth_modal.php';
 $result = file_get_contents('http://localhost/konsulent-huset/api/products');
-
 ?>
 
-<?php include 'view/components/header.php'; ?>
-<?php require 'view/components/auth_modal.php'; ?>
 <main role="main" class="container">
     <div class="row">
         <div class="col">
-            <h1>Products</h1>
 
+            <?php if (isset($success_message)) { ?>
+                <div class="alert alert-success" role="alert">
+                    <?php out($success_message) ?>
+                </div>
+            <?php } else if (isset($error_message)) { ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php out($error_message) ?>
+                </div>
+            <?php } ?>
+
+            <h1>Products</h1>
             <table class="table">
 
                 <tr>
-                    <th>Id</th>
+                    <?php if ($_SESSION["rolesId"] == 2) { ?>
+                        <th>Id</th>
+                    <?php } ?>
                     <th>Name</th>
                     <th>Title</th>
                     <th>Description</th>
@@ -21,16 +32,18 @@ $result = file_get_contents('http://localhost/konsulent-huset/api/products');
                     <th>&nbsp;</th>
                     <?php if ($_SESSION["rolesId"] == 2) { ?>
                         <th>&nbsp;</th>
-                        <th>&nbsp;</th>
+
                     <?php } ?>
                 </tr>
                 <?php $x = 0; ?>
                 <?php foreach (json_decode($result, true) as $product) { ?>
                     <?php $x++ ?>
                     <tr>
-                        <td>
-                            <?php out($product["productId"]) ?>
-                        </td>
+                        <?php if ($_SESSION["rolesId"] == 2) { ?>
+                            <td>
+                                <?php out($product["productId"]) ?>
+                            </td>
+                        <?php } ?>
                         <td>
                             <?php out($product["productName"]) ?>
                         </td>

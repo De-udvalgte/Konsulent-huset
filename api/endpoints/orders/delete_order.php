@@ -16,14 +16,22 @@ if ($order->delete($orderId)){
     // set response code
     http_response_code(200);
 
-    echo json_encode(array("message" => "Product was deleted."));
+    // set session success message
+    $_SESSION['success_message'] = "Order was deleted";
+
+    // redirect to orders page
+    header("Location: /konsulent-huset/orders");
 }
 // message if unable to delete order
 else{
     // set response code
     http_response_code(400);
-    // display message: unable to delete order
-    echo json_encode(array("message" => "Unable to delete product."));
+    
+    // set session error message
+    $_SESSION['error_message'] = "Something went wrong: Unable to delete order";
+
+    // redirect to orders page
+    header("Location: /konsulent-huset/orders");
 
     // log delete order failed
     trigger_error( $_SESSION['userId'] . " was unable to delete order with id: " . $orderId, E_USER_WARNING);

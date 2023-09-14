@@ -1,8 +1,11 @@
 <?php
 
+session_name("konsulent_huset");
+session_start();
+
 if (!is_csrf_valid()) {
     // The form is forged
-    // Code here
+    trigger_error("CSRF token not valid on new Signup with email: " . $_POST["email"] , E_USER_WARNING);
     exit();
 }
 
@@ -38,7 +41,6 @@ if (
     // set response code
     http_response_code(200);
 
-    session_start();
     if (
         !empty($_SESSION["rolesId"]) && $_SESSION["rolesId"] == 2
     ) {

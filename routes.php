@@ -4,17 +4,18 @@ require_once __DIR__ . '/router.php';
 // Home Page
 get('/konsulent-huset', 'view/index.php');
 
-
-
 //Orders
+// views:
 get('/konsulent-huset/orders', 'view/orders/orders_page.php');
 get('/konsulent-huset/edit_order_page/$orderId', 'view/orders/edit_order_page.php');
+// endpoints:
 get('/konsulent-huset/api/orders/$userId', 'api/endpoints/orders/get_orders.php');
 get('/konsulent-huset/api/orders', 'api/endpoints/orders/get_orders.php');
 get('/konsulent-huset/api/order/$orderId', 'api/endpoints/orders/get_orders.php');
 post('/konsulent-huset/api/order', 'api/endpoints/orders/create_order.php');
-delete('/konsulent-huset/api/order/$orderId', 'api/endpoints/orders/delete_order.php');
+get('/konsulent-huset/api/order/delete/$orderId', 'api/endpoints/orders/delete_order.php');
 post('/konsulent-huset/api/order/edit/$orderId', 'api/endpoints/orders/edit_order.php');
+
 // Products
 // views:
 get('/konsulent-huset/products', 'view/products/index.php');
@@ -36,7 +37,7 @@ get('/konsulent-huset/register_page', 'view/register_page.php');
 post('/konsulent-huset/register_user', 'api/endpoints/auth/register.php');
 post('/konsulent-huset/login_user', 'api/endpoints/auth/login.php');
 get('/konsulent-huset/logout', 'api/endpoints/auth/logout.php');
-POST('/konsulent-huset/api/verify_password', 'api/endpoints/auth/verify_password.php');
+post('/konsulent-huset/api/verify_password', 'api/endpoints/auth/verify_password.php');
 
 // Users / Profile
 // views:
@@ -51,4 +52,4 @@ post('/konsulent-huset/api/users/edit/$userId', 'api/endpoints/users/update.php'
 get('/konsulent-huset/api/users/delete/$userId', 'api/endpoints/users/delete.php');
 
 //errors
-any('/404','view/errors/not_found_error.php');
+any('/404', 'view/errors/not_found_error.php');

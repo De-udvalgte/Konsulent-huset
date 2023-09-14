@@ -1,14 +1,11 @@
 <?php
 
-$context = stream_context_create([
-    'http' => [
-        'header' => 'Cookie: ' . session_name() . '=' . session_id(),
-    ],
-]);
+if ($_SESSION['rolesId'] != 2) {
+    header("Location: /konsulent-huset/404");
+    exit();
+}
 
-session_write_close();
-
-$result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/products/' . $id, false, $context));
+$result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/products/' . $id));
 
 $productName = $result->productName;
 $productDesc = $result->productDesc;

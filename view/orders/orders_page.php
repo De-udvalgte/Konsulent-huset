@@ -12,8 +12,10 @@ if (isset($_SESSION['success_message'])) {
     unset($_SESSION['success_message']);
 }
 
-
-$result = "";
+if (!in_array($_SESSION['rolesId'], [1, 2])) {
+    header("Location: /konsulent-huset/404");
+    exit();
+}
 
 $context = stream_context_create([
     'http' => [
@@ -59,7 +61,7 @@ if ($_SESSION['rolesId'] == 1) {
                         <input class="form-control" type="number" id="productId" name="productId">
                     </div>
                     <br>
-                    <?php if ($_SESSION['rolesId'] === 2) { ?>
+                    <?php if ($_SESSION['rolesId'] == 2) { ?>
                         <div class="form-group">
                             <label for="userId">User ID</label>
                             <input class="form-control" type="number" id="userId" name="userId">
@@ -93,7 +95,7 @@ if ($_SESSION['rolesId'] == 1) {
                 <table class="table mt-4">
 
                     <tr>
-                        <?php if ($_SESSION['rolesId'] === 2) {
+                        <?php if ($_SESSION['rolesId'] == 2) {
                             echo "<th>ID</th>" .
                                 "<th>User ID</th>" .
                                 "<th>Product ID</th>";

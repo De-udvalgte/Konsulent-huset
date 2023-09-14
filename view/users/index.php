@@ -2,6 +2,11 @@
 
 $result = file_get_contents('http://localhost/konsulent-huset/api/users');
 
+if (!in_array($_SESSION['rolesId'], [2])) {
+    header("Location: /konsulent-huset/404");
+    exit();
+}
+
 if (isset($_SESSION['error_message'])) {
     $error_message = $_SESSION['error_message'];
     unset($_SESSION['error_message']);

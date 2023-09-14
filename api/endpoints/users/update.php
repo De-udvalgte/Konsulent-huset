@@ -9,6 +9,11 @@ if (!is_csrf_valid()) {
     exit();
 }
 
+if (!in_array($_SESSION['rolesId'], [1, 2])) {
+    header("Location: /konsulent-huset/404");
+    exit();
+}
+
 require('api/config/database.php');
 require('api/objects/user.php');
 

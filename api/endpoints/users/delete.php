@@ -6,6 +6,11 @@ require('api/objects/user.php');
 session_name("konsulent_huset");
 session_start();
 
+if ($_SESSION['rolesId'] != 2) {
+    header("Location: /konsulent-huset/404");
+    exit();
+}
+
 // get database connection
 $database = new Database();
 $db = $database->getConnection();

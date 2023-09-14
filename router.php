@@ -3,6 +3,7 @@ ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/error_log.txt');
 
+
 function get($route, $path_to_include)
 {
 	if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -37,6 +38,7 @@ function any($route, $path_to_include)
 {
 	route($route, $path_to_include);
 }
+
 function route($route, $path_to_include)
 {
 	$callback = $path_to_include;

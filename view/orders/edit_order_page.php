@@ -1,6 +1,10 @@
 <?php
-
 include 'view/components/header.php';
+
+if (!in_array($_SESSION['rolesId'], [1, 2])) {
+    header("Location: /konsulent-huset/404");
+    exit();
+}
 
 $context = stream_context_create([
     'http' => [
@@ -12,15 +16,6 @@ session_write_close();
 
 
 $result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/order/' . $orderId, false, $context));
-
-//$result = array();
-//if ($_SESSION['rolesId'] == 1) {
-//    $result = file_get_contents('http://localhost/konsulent-huset/api/orders/' . $_SESSION['userId'], false, $context);
-//} elseif ($_SESSION['rolesId'] == 2) {
-//    $result = file_get_contents('http://localhost/konsulent-huset/api/orders', false, $context);
-//}
-//
-//$result = file_get_contents('http://localhost/konsulent-huset/api/orders/2', false, $context);
 
 ?>
 

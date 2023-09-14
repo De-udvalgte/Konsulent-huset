@@ -1,4 +1,11 @@
-<?php include 'view/components/header.php'; ?>
+<?php
+include 'view/components/header.php';
+
+if ($_SESSION['rolesId'] != 2) {
+    header("Location: /konsulent-huset/404");
+    exit();
+}
+?>
 <main role="main" class="container">
     <div class="row">
         <div class="col pt-5">

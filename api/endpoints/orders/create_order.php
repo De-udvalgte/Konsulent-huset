@@ -6,15 +6,17 @@ require('api/objects/order.php');
 session_name("konsulent_huset");
 session_start();
 
+if (!in_array($_SESSION['rolesId'], [1, 2])) {
+    header("Location: /konsulent-huset/404");
+    exit();
+}
+
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
 
 // instantiate product object
 $order = new Order($db);
-
-// get posted data
-//$data = json_decode(file_get_contents("php://input"));
 
 // set product property values
 $order->orderNumber = rand(1000, 9999);

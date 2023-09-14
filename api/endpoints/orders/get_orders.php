@@ -6,6 +6,11 @@ require('api/objects/order.php');
 session_name("konsulent_huset");
 session_start();
 
+if (!in_array($_SESSION['rolesId'], [1, 2])) {
+    header("Location: /konsulent-huset/404");
+    exit();
+}
+
 // get database connection
 $database = new Database();
 $db = $database->getConnection();

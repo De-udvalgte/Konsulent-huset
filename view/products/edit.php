@@ -1,4 +1,10 @@
 <?php
+
+if ($_SESSION['rolesId'] != 2) {
+    header("Location: /konsulent-huset/404");
+    exit();
+}
+
 $result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/products/' . $id));
 
 $productName = $result->productName;
@@ -6,11 +12,8 @@ $productDesc = $result->productDesc;
 $productTitle = $result->productTitle;
 $price = $result->price;
 
+include 'view/components/header.php';
 ?>
-
-
-
-<?php include 'view/components/header.php'; ?>
 <main role="main" class="container">
     <div class="row">
         <div class="col">

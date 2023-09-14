@@ -1,7 +1,21 @@
 <?php include 'view/components/header.php';
 
+if ($_SESSION['rolesId'] != 2) {
+    header("Location: /konsulent-huset/404");
+    exit();
+}
+
+$context = stream_context_create([
+    'http' => [
+        'header' => 'Cookie: ' . session_name() . '=' . session_id(),
+    ],
+]);
+
+session_write_close();
+
+
 if (isset($userId)) {
-    $result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/users/' . $userId));
+    $result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/users/' . $userId, false, $context));
     $firstName = $result->firstName;
     $lastName = $result->lastName;
     $email = $result->email;

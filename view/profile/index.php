@@ -1,6 +1,20 @@
 <?php include 'view/components/header.php';
+
+if (!in_array($_SESSION['rolesId'], [1, 2])) {
+    header("Location: /konsulent-huset/404");
+    exit();
+}
+
+$context = stream_context_create([
+    'http' => [
+        'header' => 'Cookie: ' . session_name() . '=' . session_id(),
+    ],
+]);
+
+session_write_close();
+
 require 'view/components/auth_modal.php';
-$result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/users/' . $_SESSION["userId"]));
+$result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/users/' . $_SESSION["userId"], false, $context));
 
 $userId = $result->userId;
 $firstName = $result->firstName;

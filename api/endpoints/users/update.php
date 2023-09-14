@@ -8,7 +8,14 @@ session_start();
 /*     trigger_error("CSRF token not valid on updating User Id: " . $id, E_USER_WARNING);
     exit();
 }
+
  */
+
+if (!in_array($_SESSION['rolesId'], [1, 2])) {
+    header("Location: /konsulent-huset/404");
+    exit();
+}
+
 require('api/config/database.php');
 require('api/objects/user.php');
 

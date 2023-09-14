@@ -1,5 +1,10 @@
 <?php include 'view/components/header.php';
 
+if (!in_array($_SESSION['rolesId'], [1, 2])) {
+    header("Location: /konsulent-huset/404");
+    exit();
+}
+
 if (isset($userId)) {
     $result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/users/' . $userId));
     $firstName = $result->firstName;

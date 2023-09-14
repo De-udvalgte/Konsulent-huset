@@ -1,7 +1,15 @@
 <?php include 'view/components/header.php';
 require 'view/components/auth_modal.php';
 
-$result = file_get_contents('http://localhost/konsulent-huset/api/users');
+$context = stream_context_create([
+    'http' => [
+        'header' => 'Cookie: ' . session_name() . '=' . session_id(),
+    ],
+]);
+
+session_write_close();
+
+$result = file_get_contents('http://localhost/konsulent-huset/api/users', false, $context);
 
 if (!in_array($_SESSION['rolesId'], [2])) {
     header("Location: /konsulent-huset/404");

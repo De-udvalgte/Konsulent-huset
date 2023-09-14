@@ -13,9 +13,9 @@ $result = file_get_contents('http://localhost/konsulent-huset/api/products');
                     <?php out($success_message) ?>
                 </div>
             <?php } else if (isset($error_message)) { ?>
-                <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger" role="alert">
                     <?php out($error_message) ?>
-                </div>
+                    </div>
             <?php } ?>
 
             <h1>Products</h1>
@@ -57,18 +57,21 @@ $result = file_get_contents('http://localhost/konsulent-huset/api/products');
                             <?php out($product["price"]) ?>
                         </td>
 
-                        <td><a class="action" href="<?php out("products/page/" . $product['productId']) ?>">View</a></td>
-                        <?php if ($_SESSION["rolesId"] == 2) { ?>
-                            <td>
-                                <a class="action" href="<?php out("products/edit/" . $product['productId']) ?>">Edit</a>
-                            </td>
-                            <td>
-                                <?php insertAuthModal($x, "Confirm product deletion",  "btn btn-danger", '<i class="bi bi-trash3"></i>', "Delete product", "/konsulent-huset/products/delete/" . $product['productId'], "/konsulent-huset/products"); ?>
-                            </td>
-                        <?php } ?>
+                        <td><a class="me-1 btn btn-success" href="<?php out("products/page/" . $product['productId']) ?>"><i
+                                    class="bi bi-info-circle"></i></a>
+                            <?php if ($_SESSION["rolesId"] == 2) { ?>
+
+                                <a class="me-1 btn btn-primary" href="<?php out("products/edit/" . $product['productId']) ?>"><i
+                                        class="bi bi-pencil"></i></a>
+                               
+                                    <?php insertAuthModal($x, "Confirm product deletion", "btn btn-danger", '<i class="bi bi-trash3"></i>', "Delete product", "/konsulent-huset/products/delete/" . $product['productId'], "/konsulent-huset/products"); ?>
+                            
+                            <?php } ?>
+                        </td>
                     </tr>
-                <?php
-                };
+                    <?php
+                }
+                ;
                 ?>
             </table>
         </div>

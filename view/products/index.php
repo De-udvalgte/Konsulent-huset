@@ -1,9 +1,8 @@
 <?php
 $result = file_get_contents('http://localhost/konsulent-huset/api/products');
 
+include 'view/components/header.php';
 ?>
-
-<?php include 'view/components/header.php'; ?>
 <main role="main" class="container">
     <div class="row">
         <div class="col">

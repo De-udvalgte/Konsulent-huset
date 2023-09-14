@@ -38,6 +38,7 @@ if (
     // set response code
     http_response_code(200);
 
+    session_name("konsulent_huset");
     session_start();
     if (
         !empty($_SESSION["rolesId"]) && $_SESSION["rolesId"] == 2

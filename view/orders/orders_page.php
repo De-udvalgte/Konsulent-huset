@@ -1,7 +1,6 @@
 <?php
 
 include 'view/components/header.php';
-$result = "";
 
 $context = stream_context_create([
     'http' => [

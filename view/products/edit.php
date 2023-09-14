@@ -1,16 +1,22 @@
 <?php
-$result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/products/' . $id));
+
+$context = stream_context_create([
+    'http' => [
+        'header' => 'Cookie: ' . session_name() . '=' . session_id(),
+    ],
+]);
+
+session_write_close();
+
+$result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/products/' . $id, false, $context));
 
 $productName = $result->productName;
 $productDesc = $result->productDesc;
 $productTitle = $result->productTitle;
 $price = $result->price;
 
+include 'view/components/header.php';
 ?>
-
-
-
-<?php include 'view/components/header.php'; ?>
 <main role="main" class="container">
     <div class="row">
         <div class="col pt-5">

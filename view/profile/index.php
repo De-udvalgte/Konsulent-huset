@@ -1,5 +1,5 @@
-<?php include 'view/components/header.php'; ?>
-<?php
+<?php include 'view/components/header.php';
+
 $result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/users/' . $_SESSION["userId"]));
 $userId = $result->userId;
 $firstName = $result->firstName;
@@ -33,7 +33,7 @@ $rolesId = $result->rolesId;
                         <?php out($userId) ?>
                     </td>
                     <td>
-                        <?php out($rolesId ==  1 ? "User" : "Admin") ?>
+                        <?php out($rolesId ==  2 ? "Admin" : "User") ?>
                     </td>
                     <td>
                         <?php out($firstName) ?>

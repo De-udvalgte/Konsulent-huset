@@ -5,16 +5,18 @@ require_once __DIR__ . '/router.php';
 get('/konsulent-huset', 'view/index.php');
 
 
-
 //Orders
+// views:
 get('/konsulent-huset/orders', 'view/orders/orders_page.php');
 get('/konsulent-huset/edit_order_page/$orderId', 'view/orders/edit_order_page.php');
+// endpoints:
 get('/konsulent-huset/api/orders/$userId', 'api/endpoints/orders/get_orders.php');
 get('/konsulent-huset/api/orders', 'api/endpoints/orders/get_orders.php');
 get('/konsulent-huset/api/order/$orderId', 'api/endpoints/orders/get_orders.php');
 post('/konsulent-huset/api/order', 'api/endpoints/orders/create_order.php');
 delete('/konsulent-huset/api/order/$orderId', 'api/endpoints/orders/delete_order.php');
 post('/konsulent-huset/api/order/edit/$orderId', 'api/endpoints/orders/edit_order.php');
+
 // Products
 // views:
 get('/konsulent-huset/products', 'view/products/index.php');
@@ -50,4 +52,4 @@ post('/konsulent-huset/api/users/edit/$userId', 'api/endpoints/users/update.php'
 get('/konsulent-huset/api/users/delete/$userId', 'api/endpoints/users/delete.php');
 
 //errors
-any('/404','view/errors/not_found_error.php');
+any('/404', 'view/errors/not_found_error.php');

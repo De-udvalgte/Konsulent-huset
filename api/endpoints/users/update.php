@@ -1,10 +1,6 @@
 <?php
 
-if (!is_csrf_valid()) {
-    // The form is forged
-    // Code here
-    exit();
-}
+
 
 session_name("konsulent_huset");
 session_start();
@@ -63,7 +59,7 @@ else {
     echo json_encode(array("message" => "Unable to update user.", $user->email));
 
     // log update user failed
-    if($_SESSION["userId"] == $userId) {
+    if ($_SESSION["userId"] == $userId) {
         trigger_error("ID: " . $_SESSION['userId'] . " was unable to update account", E_USER_WARNING);
     } else {
         trigger_error("ID: " . $_SESSION['userId'] . " was unable to update user with id: " . $userId, E_USER_WARNING);

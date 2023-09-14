@@ -37,6 +37,7 @@ get('/konsulent-huset/register_page', 'view/register_page.php');
 post('/konsulent-huset/register_user', 'api/endpoints/auth/register.php');
 post('/konsulent-huset/login_user', 'api/endpoints/auth/login.php');
 get('/konsulent-huset/logout', 'api/endpoints/auth/logout.php');
+post('/konsulent-huset/api/verify_password', 'api/endpoints/auth/verify_password.php');
 
 // Users / Profile
 // views:
@@ -51,4 +52,4 @@ post('/konsulent-huset/api/users/edit/$userId', 'api/endpoints/users/update.php'
 get('/konsulent-huset/api/users/delete/$userId', 'api/endpoints/users/delete.php');
 
 //errors
-any('/404','view/errors/not_found_error.php');
+any('/404', 'view/errors/not_found_error.php');

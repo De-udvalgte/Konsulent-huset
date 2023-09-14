@@ -135,6 +135,20 @@ class Order
         }
     }
 
+    function deleteByUserId($userId)
+    {
+
+        $query = "DELETE FROM " . $this->table_name . " WHERE userId=" . $userId;
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+
+        // execute the query, also check if query was successful
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
     function edit($orderId, $editedOrder)
     {
 
@@ -173,5 +187,4 @@ class Order
             trigger_error($e->getMessage(), E_USER_WARNING);
         }
     }
-
 }

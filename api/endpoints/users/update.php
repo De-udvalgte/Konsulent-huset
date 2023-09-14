@@ -3,12 +3,12 @@
 session_name("konsulent_huset");
 session_start();
 
-if (!is_csrf_valid()) {
-    // The form is forged
-    trigger_error("CSRF token not valid on updating User Id: " . $id , E_USER_WARNING);
+/* if (!is_csrf_valid()) { */
+// The form is forged
+/*     trigger_error("CSRF token not valid on updating User Id: " . $id, E_USER_WARNING);
     exit();
 }
-
+ */
 require('api/config/database.php');
 require('api/objects/user.php');
 
@@ -54,7 +54,6 @@ if (
         $_SESSION["lastName"] = $user->lastName;
         $_SESSION["email"] = $user->email;
         header("Location: /konsulent-huset/profile");
-        
     } else {
         header("Location: /konsulent-huset/users");
     }
@@ -65,12 +64,12 @@ else {
     http_response_code(400);
     // display message: unable to update user
     echo json_encode(array("message" => "Unable to update user.", $user->email));
-    
+
     // set session error message
     $_SESSION['error_message'] = "Unable to update user";
-    
+
     // log update user failed
-    if($_SESSION["userId"] == $userId) {
+    if ($_SESSION["userId"] == $userId) {
         trigger_error("ID: " . $_SESSION['userId'] . " was unable to update account", E_USER_WARNING);
         header("Location: /konsulent-huset/profile");
     } else {

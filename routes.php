@@ -50,3 +50,8 @@ get('/konsulent-huset/api/users/delete/$userId', 'api/endpoints/users/delete.php
 
 //errors
 any('/404','view/errors/not_found_error.php');
+
+any('/400','view/errors/errors.php');
+/* any('/401','view/errors/errors.php');
+any('/403','view/errors/errors.php');
+any('/500','view/errors/errors.php');  */

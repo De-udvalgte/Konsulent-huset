@@ -24,7 +24,7 @@
 <?php function insertAuthModal($id, $title, $btn_class, $btn_label, $action_btn_label, $action_href, $prev_dir)
 { ?>
     <!-- Button trigger modal -->
-    <a type="button" id="<?php out("btn" . $id) ?>" class="<?php out($btn_class) ?>" data-bs-toggle="modal" data-bs-target="<?php out("#modal" . $id) ?>" onclick=>
+    <a type="button" id="<?php out("btn" . $id) ?>" class="<?php out($btn_class . " mt-3") ?>" data-bs-toggle="modal" data-bs-target="<?php out("#modal" . $id) ?>" onclick=>
         <?php echo $btn_label ?>
     </a>
     <!-- Modal -->

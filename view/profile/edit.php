@@ -28,9 +28,7 @@ if (isset($userId)) {
             </div>
 
 
-            <form id="form-edit" action="<?php echo "/konsulent-huset/api/users/edit/" . $userId ?>" method="POST">
-                <?php echo $userId ?>
-
+            <form id="form-edit" action="<?php out("/konsulent-huset/api/users/edit/" . $userId) ?>" method="POST">
                 <input type="hidden" id="rolesId" name="rolesId" value=<?php out($rolesId) ?>>
 
                 <div class="form-group">
@@ -50,7 +48,7 @@ if (isset($userId)) {
 
                 <!-- <button class="btn btn-primary mt-3" type="submit">Save</button> -->
                 <!-- Button trigger modal -->
-                <a type="button" id="btn1" class="btn btn-warning mt-3" data-bs-toggle="modal" data-bs-target="#modal1" onclick=>
+                <a type="button" id="btn1" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal1" onclick=>
                     Save changes
                 </a>
 
@@ -82,7 +80,7 @@ if (isset($userId)) {
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" id="btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-warning" id="modal-btn">Save changes</button>
+                                <button type="button" class="btn btn-primary" id="modal-btn">Save changes</button>
                             </div>
 
                             <h1 id="hello"> </h1>
@@ -97,7 +95,7 @@ if (isset($userId)) {
 <script>
     const element = document.getElementById("modal-btn");
     element.addEventListener("click", function() {
-
+        document.getElementById('form-edit').submit();
         <?php
 
         /* if (!is_csrf_valid()) { */
@@ -124,15 +122,15 @@ if (isset($userId)) {
         $pass = "document.getElementById('password').value";
         if ($email_exists && password_verify($pass, $user->password)) { ?>
 
-            /* document.getElementById('form-edit').submit(); */
-            document.getElementById('form-edit').submit();
-            console.log(document.getElementById('hello').value = "hello " + $pass);
+
+
+
         <?php } else { ?>
 
-            document.getElementById("alert-update").style.display = "block";
+            /*    document.getElementById("alert-update").style.display = "block"; */
             document.getElementById("password").value = "";
             document.getElementById("btn-cancel").click();
-            console.log(document.getElementById('hello').value = "hello world " + $pass);
+
 
         <?php } ?>
     })

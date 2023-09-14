@@ -51,7 +51,7 @@
 
                 <div class="form-group password-needs-validation2">
                     <label for="password" class="form-label">Password</label>
-                    <input class="form-control password" type="password" id="password" name="password" required>
+                    <input class="form-control" type="password" id="password" name="password" required>
                     <div class="invalid-feedback">
                         Please provide a valid password.
                     </div>

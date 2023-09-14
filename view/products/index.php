@@ -1,17 +1,7 @@
-<?php include 'view/components/header.php';
-
+<?php
+include 'view/components/header.php';
+require 'view/components/auth_modal.php';
 $result = file_get_contents('http://localhost/konsulent-huset/api/products');
-
-if (isset($_SESSION['error_message'])) {
-    $error_message = $_SESSION['error_message'];
-    unset($_SESSION['error_message']);
-}
-
-if (isset($_SESSION['success_message'])) {
-    $success_message = $_SESSION['success_message'];
-    unset($_SESSION['success_message']);
-}
-
 ?>
 
 <main role="main" class="container">
@@ -45,9 +35,9 @@ if (isset($_SESSION['success_message'])) {
 
                     <?php } ?>
                 </tr>
-
+                <?php $x = 0; ?>
                 <?php foreach (json_decode($result, true) as $product) { ?>
-
+                    <?php $x++ ?>
                     <tr>
                         <?php if ($_SESSION["rolesId"] == 2) { ?>
                             <td>
@@ -73,19 +63,16 @@ if (isset($_SESSION['success_message'])) {
 
                                 <a class="me-1 btn btn-primary" href="<?php out("products/edit/" . $product['productId']) ?>"><i
                                         class="bi bi-pencil"></i></a>
-
-                                <a class="me-1 btn btn-danger"
-                                    href="<?php out("products/delete/" . $product['productId']) ?>"><i
-                                        class="bi bi-trash3"></i></a>
+                               
+                                    <?php insertAuthModal($x, "Confirm product deletion", "btn btn-danger", '<i class="bi bi-trash3"></i>', "Delete product", "/konsulent-huset/products/delete/" . $product['productId'], "/konsulent-huset/products"); ?>
+                            
                             <?php } ?>
                         </td>
                     </tr>
                     <?php
-                } ?>
-
-
-
-
+                }
+                ;
+                ?>
             </table>
         </div>
     </div>

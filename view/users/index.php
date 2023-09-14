@@ -1,4 +1,5 @@
 <?php include 'view/components/header.php';
+require 'view/components/auth_modal.php';
 
 $result = file_get_contents('http://localhost/konsulent-huset/api/users');
 
@@ -17,7 +18,6 @@ if (isset($_SESSION['success_message'])) {
     unset($_SESSION['success_message']);
 }
 ?>
-
 <main role="main" class="container">
     <div class="row">
         <div class="col">
@@ -26,9 +26,9 @@ if (isset($_SESSION['success_message'])) {
                     <?php out($success_message) ?>
                 </div>
             <?php } else if (isset($error_message)) { ?>
-                    <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger" role="alert">
                     <?php out($error_message) ?>
-                    </div>
+                </div>
             <?php } ?>
             <h1>Users</h1>
 
@@ -47,9 +47,9 @@ if (isset($_SESSION['success_message'])) {
                     <th>Last modified</th>
                     <th></th>
                 </tr>
-
+                <?php $x = 0; ?>
                 <?php foreach (json_decode($result, true) as $user) { ?>
-
+                    <?php $x++ ?>
                     <tr>
                         <td>
                             <?php out($user["userId"]) ?>
@@ -73,17 +73,13 @@ if (isset($_SESSION['success_message'])) {
                             <?php out($user["modified"]) ?>
                         </td>
                         <td>
-                            <a class="me-1 btn btn-primary"
-                                href="<?php out("/konsulent-huset/users/edit/" . $user['userId']) ?>"><i
-                                    class="bi bi-pencil"></i></a>
-                            <a class="btn btn-danger"
-                                href="<?php out("/konsulent-huset/api/users/delete/" . $user['userId']) ?>"><i
-                                    class="bi bi-trash3"></i></a>
+                            <a class="me-1 btn btn-primary" href="<?php out("/konsulent-huset/users/edit/" . $user['userId']) ?>"><i class="bi bi-pencil"></i></a>
+                            <?php insertAuthModal($x, "Confirm user deletion",  "btn btn-danger", '<i class="bi bi-trash3"></i>', "Delete user", "/konsulent-huset/api/users/delete/" . $user['userId'], "/konsulent-huset/users"); ?>
+
                         </td>
                     </tr>
-                    <?php
-                }
-                ;
+                <?php
+                };
                 ?>
             </table>
         </div>

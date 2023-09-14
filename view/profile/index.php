@@ -13,6 +13,7 @@ $context = stream_context_create([
 
 session_write_close();
 
+require 'view/components/auth_modal.php';
 $result = json_decode(file_get_contents('http://localhost/konsulent-huset/api/users/' . $_SESSION["userId"], false, $context));
 
 $userId = $result->userId;
@@ -43,14 +44,15 @@ if (isset($_SESSION['success_message'])) {
                     <?php out($success_message) ?>
                 </div>
             <?php } else if (isset($error_message)) { ?>
-                    <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger" role="alert">
                     <?php out($error_message) ?>
-                    </div>
+                </div>
             <?php } ?>
             <h1>Profile</h1>
 
-            <a class="btn btn-primary mt-3" href="/konsulent-huset/profile/edit">Edit</a>
-            <a class="btn btn-danger mt-3" href=<?php echo "/konsulent-huset/api/users/delete/" . $userId ?>>Delete</a>
+            <a class="btn btn-primary" href="/konsulent-huset/profile/edit">Edit</a>
+            <?php insertAuthModal(1, "Confirm profile deletion",  "btn btn-danger", 'Delete', "Delete profile", "/konsulent-huset/api/users/delete/" . $userId, "/konsulent-huset/profile"); ?>
+
             <table class="table">
 
                 <tr>

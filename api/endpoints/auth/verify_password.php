@@ -1,10 +1,14 @@
 <?php
 
-if (!is_csrf_valid()) {
+/*if (!is_csrf_valid()) {
     // The form is forged
     // Code here
     exit();
 }
+*/
+
+session_name("konsulent_huset");
+session_start();
 
 require('api/config/database.php');
 require('api/objects/user.php');

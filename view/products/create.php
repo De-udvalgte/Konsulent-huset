@@ -2,6 +2,7 @@
 include 'view/components/header.php';
 
 if ($_SESSION['rolesId'] != 2) {
+    $_SESSION['unauthorized'] = true;
     header("Location: /konsulent-huset/404");
     exit();
 }

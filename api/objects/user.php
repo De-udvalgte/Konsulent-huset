@@ -56,7 +56,7 @@ class User
             }
             return false;
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
     }
 
@@ -72,7 +72,7 @@ class User
             $stmt->execute();
             return $stmt;
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
     }
 
@@ -103,7 +103,7 @@ class User
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
 
         // set values to object properties
@@ -149,7 +149,7 @@ class User
             }
             return false;
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
     }
 
@@ -204,7 +204,7 @@ class User
 
             // return false if email does not exist in the database
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
         return false;
     }
@@ -230,7 +230,7 @@ class User
             }
             return false;
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
     }
 }

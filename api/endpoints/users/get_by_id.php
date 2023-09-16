@@ -7,6 +7,7 @@ session_name("konsulent_huset");
 session_start();
 
 if (!in_array($_SESSION['rolesId'], [1, 2])) {
+    $_SESSION['unauthorized'] = true;
     header("Location: /konsulent-huset/404");
     exit();
 }
@@ -50,6 +51,6 @@ if ($user != null) {
     );
 
     // log no user found
-    trigger_error("Was unable to find user by Id: " . $userId, E_USER_WARNING);
+    trigger_error(getClientIP() . " || Was unable to find user by Id: " . $userId . " || ", E_USER_WARNING);
 
 }

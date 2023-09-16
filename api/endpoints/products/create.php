@@ -5,7 +5,7 @@ session_start();
 
 if (!is_csrf_valid()) {
     // The form is forged
-    trigger_error("CSRF token not valid on Create new product" , E_USER_WARNING);
+    trigger_error(getClientIP() . " || CSRF token not valid on Create new product || ", E_USER_WARNING);
     exit();
 }
 
@@ -44,6 +44,7 @@ if (
      $_SESSION['success_message'] = "Product was created";
    
     header("Location: /konsulent-huset/products");
+    trigger_error(getClientIP() . " || ID: " . $_SESSION['userId'] . " create new product ID: " . $product->productId . " || ", E_USER_NOTICE);
    
 }
 // message if unable to create product
@@ -55,5 +56,5 @@ else {
     $_SESSION['error_message'] = "Unable to create product";
 
     // log create product failed
-    trigger_error("ID: " . $_SESSION['userId'] . " was unable to create product with name: " . $product->productName, E_USER_WARNING);
+    trigger_error(getClientIP() . " || ID: " . $_SESSION['userId'] . " was unable to create product with name: " . $product->productName . " || ", E_USER_WARNING);
 }

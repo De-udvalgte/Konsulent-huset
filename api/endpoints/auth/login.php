@@ -5,7 +5,7 @@ session_start();
 
 if (!is_csrf_valid()) {
     // The form is forged
-    trigger_error("CSRF token not valid on Login User email: " . $_POST["email"] , E_USER_WARNING);
+    trigger_error(getClientIP() . " || CSRF token not valid on Login User email: " . $_POST["email"] . " || ", E_USER_WARNING);
     exit();
 }
 
@@ -36,6 +36,8 @@ if ($email_exists && password_verify($_POST["password"], $user->password)) {
     unset($_SESSION["login_attempt"]);
     header("Location: /konsulent-huset");
     echo json_encode(array("message" => "Successful login."));
+
+    trigger_error(getClientIP() . " || ID: " . $user->userId . " Logged in succesfully || ", E_USER_NOTICE);
 }
 // login failed
 else {
@@ -48,5 +50,5 @@ else {
     echo json_encode(array("message" => "Login failed."));
 
     // log login failed
-    trigger_error("Login failed for user with email: " . $_POST["email"], E_USER_WARNING);
+    trigger_error(getClientIP() . " || Login failed for user with email: " . $_POST["email"] . " || ", E_USER_WARNING);
 }

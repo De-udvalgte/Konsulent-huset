@@ -7,6 +7,7 @@ session_name("konsulent_huset");
 session_start();
 
 if (!in_array($_SESSION['rolesId'], [1, 2])) {
+    $_SESSION['unauthorized'] = true;
     header("Location: /konsulent-huset/404");
     exit();
 }
@@ -59,5 +60,5 @@ else {
     header("Location: /konsulent-huset/orders");
 
     // log create order failed
-    trigger_error("ID: " . $_SESSION['userId'] . " was unable to create order for user with id: " . $_SESSION['userId'], E_USER_WARNING);
+    trigger_error(getClientIP() . " || ID: " . $_SESSION['userId'] . " was unable to create order for user with id: " . $_SESSION['userId'] . " || ", E_USER_WARNING);
 }

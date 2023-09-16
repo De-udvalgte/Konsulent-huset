@@ -60,6 +60,6 @@ else {
     header("Location: /konsulent-huset/products");
 
     // log update product failed
-    trigger_error("ID: " . $_SESSION['userId'] . " was unable to update product with id: " . $id, E_USER_WARNING);
+    trigger_error(getClientIP() . " || ID: " . $_SESSION['userId'] . " was unable to update product with id: " . $id . " || ", E_USER_WARNING);
 }
 ?>

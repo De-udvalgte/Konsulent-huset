@@ -2,6 +2,16 @@
 include 'view/components/header.php';
 require 'view/components/auth_modal.php';
 $result = file_get_contents('http://localhost/konsulent-huset/api/products');
+
+if (isset($_SESSION['error_message'])) {
+    $error_message = $_SESSION['error_message'];
+    unset($_SESSION['error_message']);
+}
+
+if (isset($_SESSION['success_message'])) {
+    $success_message = $_SESSION['success_message'];
+    unset($_SESSION['success_message']);
+}
 ?>
 
 <main role="main" class="container">

@@ -5,7 +5,7 @@ session_start();
 
 if (!is_csrf_valid()) {
     // The form is forged
-    trigger_error("CSRF token not valid on new Signup with email: " . $_POST["email"] , E_USER_WARNING);
+    trigger_error(getClientIP() . " || CSRF token not valid on new Signup with email: " . $_POST["email"] . " || ", E_USER_WARNING);
     exit();
 }
 
@@ -60,5 +60,5 @@ else {
     echo json_encode(array("message" => "Unable to create user.", $user->email));
 
     // log register failed
-    trigger_error("Register user failed for email: " . $_POST["email"], E_USER_WARNING);
+    trigger_error(getClientIP() . " || Register user failed for email: " . $_POST["email"] . " || ", E_USER_WARNING);
 }

@@ -25,7 +25,7 @@ class Product
         try {
             $stmt->execute();
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
 
         return $stmt;
@@ -54,7 +54,7 @@ class Product
         try {
             $stmt->execute();
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
 
         // get retrieved row
@@ -94,11 +94,12 @@ class Product
         // execute the query, also check if query was successful
         try {
             if ($stmt->execute()) {
+                $this->productId = $this->conn->lastInsertId();
                 return true;
             }
             return false;
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
     }
 
@@ -138,7 +139,7 @@ class Product
             }
             return false;
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
 
     }
@@ -164,7 +165,7 @@ class Product
             }
             return false;
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
     }
 }

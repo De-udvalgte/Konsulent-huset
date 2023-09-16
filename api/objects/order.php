@@ -29,7 +29,7 @@ class Order
         try {
             $stmt->execute();
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
         return $stmt;
     }
@@ -44,7 +44,7 @@ class Order
         try {
             $stmt->execute();
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
 
         return $stmt;
@@ -113,7 +113,7 @@ class Order
             }
             return false;
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
     }
 
@@ -131,7 +131,7 @@ class Order
             }
             return false;
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
     }
 
@@ -184,7 +184,7 @@ class Order
             }
             return false;
         } catch (PDOException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
+            trigger_error(getClientIP() . " || " . $e->getMessage() . "|| ", E_USER_WARNING);
         }
     }
 }

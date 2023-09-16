@@ -5,13 +5,14 @@ session_start();
 
 /* if (!is_csrf_valid()) { */
 // The form is forged
-/*     trigger_error("CSRF token not valid on updating User Id: " . $id, E_USER_WARNING);
+/*     trigger_error(getClientIP() . " || CSRF token not valid on updating User Id: " . $id . " || ", E_USER_WARNING);
     exit();
 }
 
  */
 
 if (!in_array($_SESSION['rolesId'], [1, 2])) {
+    $_SESSION['unauthorized'] = true;
     header("Location: /konsulent-huset/404");
     exit();
 }
@@ -77,10 +78,10 @@ else {
 
     // log update user failed
     if ($_SESSION["userId"] == $userId) {
-        trigger_error("ID: " . $_SESSION['userId'] . " was unable to update account", E_USER_WARNING);
+        trigger_error(getClientIP() . " || ID: " . $_SESSION['userId'] . " was unable to update account || ", E_USER_WARNING);
         header("Location: /konsulent-huset/profile");
     } else {
-        trigger_error("ID: " . $_SESSION['userId'] . " was unable to update user with id: " . $userId, E_USER_WARNING);
+        trigger_error(getClientIP() . " || ID: " . $_SESSION['userId'] . " was unable to update user with id: " . $userId . " || ", E_USER_WARNING);
         header("Location: /konsulent-huset/users");
     }
 }

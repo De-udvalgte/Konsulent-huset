@@ -7,6 +7,7 @@ session_name("konsulent_huset");
 session_start();
 
 if ($_SESSION['rolesId'] != 2) {
+    $_SESSION['unauthorized'] = true;
     header("Location: /konsulent-huset/404");
     exit();
 }
@@ -58,5 +59,5 @@ if ($stmt->rowCount() > 0) {
     );
 
     // log no users found
-    trigger_error("Admin was unable to find any users", E_USER_WARNING);
+    trigger_error(getClientIP() . " || Admin was unable to find any users || ", E_USER_WARNING);
 }

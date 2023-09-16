@@ -44,5 +44,5 @@ if ($product != null) {
     );
 
     // log no products found
-    trigger_error("User was unable to find product by Id: " . $id, E_USER_WARNING);
+    trigger_error(getClientIP() . " || User was unable to find product by Id: " . $id . " || ", E_USER_WARNING);
 }

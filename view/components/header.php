@@ -2,6 +2,9 @@
 session_name("konsulent_huset");
 session_start();
 
+if(!isset($_SESSION['rolesId'])){
+    $_SESSION['rolesId'] = 0;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

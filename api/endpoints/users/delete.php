@@ -8,6 +8,7 @@ session_name("konsulent_huset");
 session_start();
 
 if ($_SESSION['rolesId'] != 2) {
+    $_SESSION['unauthorized'] = true;
     header("Location: /konsulent-huset/404");
     exit();
 }
@@ -44,8 +45,8 @@ if ($order->deleteByUserId($user->userId) && $user->delete()) {
 
     // log delete user failed
     if ($_SESSION["userId"] == $userId) {
-        trigger_error("ID: " . $_SESSION['userId'] . " was unable to delete account", E_USER_WARNING);
+        trigger_error(getClientIP() . " || ID: " . $_SESSION['userId'] . " was unable to delete account || ", E_USER_WARNING);
     } else {
-        trigger_error("ID: " . $_SESSION['userId'] . " was unable to delete user with id: " . $userId, E_USER_WARNING);
+        trigger_error(getClientIP() . " || ID: " . $_SESSION['userId'] . " was unable to delete user with id: " . $userId . " || ", E_USER_WARNING);
     }
 }

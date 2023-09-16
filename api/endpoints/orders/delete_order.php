@@ -7,6 +7,7 @@ session_name("konsulent_huset");
 session_start();
 
 if (!in_array($_SESSION['rolesId'], [1, 2])) {
+    $_SESSION['unauthorized'] = true;
     header("Location: /konsulent-huset/404");
     exit();
 }
@@ -39,6 +40,6 @@ else{
     header("Location: /konsulent-huset/orders");
 
     // log delete order failed
-    trigger_error( $_SESSION['userId'] . " was unable to delete order with id: " . $orderId, E_USER_WARNING);
+    trigger_error( $_SESSION['userId'] . " was unable to delete order with id: " . $orderId . " || ", E_USER_WARNING);
 
 }

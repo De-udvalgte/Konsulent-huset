@@ -12,6 +12,7 @@ session_write_close();
 $result = file_get_contents('http://localhost/konsulent-huset/api/users', false, $context);
 
 if (!in_array($_SESSION['rolesId'], [2])) {
+    $_SESSION['unauthorized'] = true;
     header("Location: /konsulent-huset/404");
     exit();
 }

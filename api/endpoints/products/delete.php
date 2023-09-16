@@ -23,6 +23,9 @@ if ($product->delete()) {
 
         // set session success message
         $_SESSION['success_message'] = "Product was deleted";
+
+        // log delete product success
+        trigger_error(getClientIP() . " || ID: " . $_SESSION['userId'] . " deleted product with id: " . $id . " || ", E_USER_NOTICE);
         
         header("Location: /konsulent-huset/products");
         
@@ -34,7 +37,7 @@ if ($product->delete()) {
         $_SESSION['error_message'] = "Unable to delete product";
 
         // log delete product failed
-        trigger_error("ID: " . $_SESSION['userId'] . " was unable to delete product with id: " . $id, E_USER_WARNING);
+        trigger_error(getClientIP() . " || ID: " . $_SESSION['userId'] . " was unable to delete product with id: " . $id . " || ", E_USER_WARNING);
         
         header("Location: /konsulent-huset/products");
 }

@@ -1,6 +1,8 @@
 <?php
+include 'view/components/header.php';
 
 if ($_SESSION['rolesId'] != 2) {
+    $_SESSION['unauthorized'] = true;
     header("Location: /konsulent-huset/404");
     exit();
 }
@@ -11,8 +13,6 @@ $productName = $result->productName;
 $productDesc = $result->productDesc;
 $productTitle = $result->productTitle;
 $price = $result->price;
-
-include 'view/components/header.php';
 ?>
 <main role="main" class="container">
     <div class="row">
